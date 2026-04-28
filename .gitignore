@@ -1,0 +1,21 @@
+# Ignore everything at the root level
+/*
+
+# Except these
+!client/
+!server/
+!README.md
+!.gitignore
+
+# Inside client — ignore node_modules and build output
+client/node_modules/
+client/dist/
+client/.env
+
+# Inside server — ignore node_modules and env
+server/node_modules/
+server/.env
+
+# Kiro and editor config
+.kiro/
+.vscode/
