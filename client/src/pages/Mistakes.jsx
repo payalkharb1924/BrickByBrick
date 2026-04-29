@@ -15,7 +15,7 @@ export default function Mistakes() {
   };
 
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6 p-5">
       <h1 className="text-xl font-bold text-white">Mistake Log</h1>
 
       <div className="flex gap-1 border-b" style={{ borderColor: '#1f1f1f' }}>

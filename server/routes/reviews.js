@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middleware/auth');
-const { createReview, getReviews, updateReview, autofillReview } = require('../controllers/reviewController');
+const { createReview, getReviews, updateReview, deleteReview, autofillReview } = require('../controllers/reviewController');
 
 router.use(protect);
 
@@ -11,5 +11,6 @@ router.get('/autofill', autofillReview);
 router.post('/', createReview);
 router.get('/', getReviews);
 router.put('/:id', updateReview);
+router.delete('/:id', deleteReview);
 
 module.exports = router;

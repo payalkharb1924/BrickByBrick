@@ -30,7 +30,7 @@ export default function Reviews() {
   const skipped = reviews.length > 0 && !hasReviewThisWeek(reviews);
 
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6 p-5">
       <h1 className="text-xl font-bold text-white">Weekly Reviews</h1>
 
       {sunday && !hasReviewThisWeek(reviews) && (

@@ -109,4 +109,15 @@ const autofillReview = async (req, res) => {
   }
 };
 
-module.exports = { createReview, getReviews, updateReview, autofillReview };
+// DELETE /api/reviews/:id
+const deleteReview = async (req, res) => {
+  try {
+    const review = await WeeklyReview.findOneAndDelete({ _id: req.params.id, user: req.user.id });
+    if (!review) return res.status(404).json({ success: false, message: 'Review not found' });
+    res.json({ success: true, message: 'Deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+module.exports = { createReview, getReviews, updateReview, deleteReview, autofillReview };

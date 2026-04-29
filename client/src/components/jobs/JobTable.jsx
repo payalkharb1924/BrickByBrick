@@ -2,6 +2,7 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { CheckCircle2 } from 'lucide-react';
 import useJobStore from '../../store/jobStore';
+import Modal from '../Modal';
 
 const STATUS_BADGE = {
   Applied:               { background: '#0a1020', color: '#60a5fa' },
@@ -28,8 +29,8 @@ function EditModal({ app, onClose, onSave }) {
   const set = (field, value) => setForm((f) => ({ ...f, [field]: value }));
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-      <div className="rounded-xl p-6 w-full max-w-lg space-y-4 max-h-[90vh] overflow-y-auto modal-enter" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+    <Modal>
+      <div className="rounded-xl p-6 w-full max-w-lg space-y-4 max-h-[90vh] overflow-y-auto" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
         <h3 className="text-white font-semibold text-base">Edit Application</h3>
         <div className="grid grid-cols-2 gap-3">
           {[['company', 'Company'], ['role', 'Role']].map(([field, label]) => (
@@ -88,7 +89,7 @@ function EditModal({ app, onClose, onSave }) {
           <button onClick={onClose} className="flex-1 text-zinc-300 text-sm py-2 rounded-lg" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -213,8 +214,8 @@ export default function JobTable() {
       )}
 
       {deleteId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="rounded-xl p-6 w-80 space-y-4 modal-enter" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+        <Modal>
+          <div className="rounded-xl p-6 w-80 space-y-4" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
             <p className="text-white text-sm">Delete this application?</p>
             <div className="flex gap-3">
               <button onClick={async () => { await deleteApplication(deleteId); setDeleteId(null); }}
@@ -223,7 +224,7 @@ export default function JobTable() {
                 className="flex-1 text-zinc-300 text-sm py-2 rounded-lg" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
             </div>
           </div>
-        </div>
+        </Modal>
       )}
 
       {editApp && <EditModal app={editApp} onClose={() => setEditApp(null)} onSave={async (data) => { await updateApplication(editApp._id, data); setEditApp(null); }} />}

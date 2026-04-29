@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { XCircle, Clock, CheckCircle2 } from 'lucide-react';
 import useDsaStore from '../../store/dsaStore';
 import MistakeForm from '../mistakes/MistakeForm';
+import Modal from '../Modal';
 
 const DIFFICULTY_BADGE = {
   Easy:   { background: '#0f2a0f', color: '#4ade80' },
@@ -28,8 +29,8 @@ function EditModal({ entry, onClose, onSave }) {
   const set = (field, value) => setForm((f) => ({ ...f, [field]: value }));
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-      <div className="rounded-xl p-6 w-full max-w-lg space-y-4 max-h-[90vh] overflow-y-auto modal-enter" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+    <Modal>
+      <div className="rounded-xl p-6 w-full max-w-lg space-y-4 max-h-[90vh] overflow-y-auto" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
         <h3 className="text-white font-semibold text-base">Edit Entry</h3>
         <div className="grid grid-cols-2 gap-3">
           {[['problemName', 'Problem Name'], ['topic', 'Topic'], ['pattern', 'Pattern']].map(([field, label]) => (
@@ -95,7 +96,7 @@ function EditModal({ entry, onClose, onSave }) {
             style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -231,8 +232,8 @@ export default function DSATable() {
       )}
 
       {deleteId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="rounded-xl p-6 w-80 space-y-4 modal-enter" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+        <Modal>
+          <div className="rounded-xl p-6 w-80 space-y-4" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
             <p className="text-white text-sm">Are you sure you want to delete this entry?</p>
             <div className="flex gap-3">
               <button onClick={async () => { await deleteEntry(deleteId); setDeleteId(null); }}
@@ -241,18 +242,18 @@ export default function DSATable() {
                 className="flex-1 text-zinc-300 text-sm py-2 rounded-lg transition-colors" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
             </div>
           </div>
-        </div>
+        </Modal>
       )}
 
       {editEntry && <EditModal entry={editEntry} onClose={() => setEditEntry(null)} onSave={async (data) => { await updateEntry(editEntry._id, data); setEditEntry(null); }} />}
 
       {mistakePrefill && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="w-full max-w-lg mx-4">
+        <Modal>
+          <div className="w-full max-w-lg">
             <MistakeForm prefill={mistakePrefill} onSuccess={() => setMistakePrefill(null)} />
             <button onClick={() => setMistakePrefill(null)} className="mt-3 w-full text-sm text-zinc-500 hover:text-white transition-colors">Cancel</button>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );

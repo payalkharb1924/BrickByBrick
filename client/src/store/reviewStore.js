@@ -54,6 +54,17 @@ const useReviewStore = create((set, get) => ({
     }
   },
 
+  deleteReview: async (id) => {
+    const prev = get().reviews;
+    set((state) => ({ reviews: state.reviews.filter((r) => r._id !== id) }));
+    try {
+      await api.delete(`/reviews/${id}`);
+    } catch (err) {
+      set({ reviews: prev, error: err.response?.data?.message || 'Failed to delete review' });
+      throw err;
+    }
+  },
+
   fetchAutofill: async () => {
     try {
       const { data } = await api.get('/reviews/autofill');

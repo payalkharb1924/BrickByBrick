@@ -23,7 +23,7 @@ export default function DSA() {
   };
 
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6 p-5">
       <h1 className="text-xl font-bold text-white">DSA Tracker</h1>
 
       {error && (

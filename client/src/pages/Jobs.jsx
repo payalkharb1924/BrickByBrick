@@ -38,7 +38,7 @@ export default function Jobs() {
   const repeatedCompanies = repeatedWithoutReferral(applications);
 
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6 p-5">
       <h1 className="text-xl font-bold text-white">Job Applications</h1>
 
       {error && (

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { AlertTriangle, Repeat2 } from 'lucide-react';
 import useMistakeStore from '../../store/mistakeStore';
+import Modal from '../Modal';
 
 const MISTAKE_TYPES = [
   'Wrong Approach', 'Off-by-one Error', 'Edge Case Missed',
@@ -105,8 +106,8 @@ export default function MistakeList() {
       )}
 
       {deleteId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-          <div className="rounded-xl p-6 w-80 space-y-4 modal-enter" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+        <Modal>
+          <div className="rounded-xl p-6 w-80 space-y-4" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
             <p className="text-white text-sm">Delete this mistake log?</p>
             <div className="flex gap-3">
               <button onClick={async () => { await deleteMistake(deleteId); setDeleteId(null); }}
@@ -115,7 +116,7 @@ export default function MistakeList() {
                 className="flex-1 text-zinc-300 text-sm py-2 rounded-lg" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
             </div>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );
