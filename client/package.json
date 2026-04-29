@@ -1,7 +1,7 @@
 {
-  "name": "grindtracker-client",
+  "name": "brickbybrick-client",
   "version": "1.0.0",
-  "description": "GrindTracker frontend",
+  "description": "BrickByBrick frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",
