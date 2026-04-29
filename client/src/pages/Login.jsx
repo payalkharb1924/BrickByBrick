@@ -36,7 +36,7 @@ export default function Login() {
             <Zap size={22} color="#000" strokeWidth={2.5} />
           </div>
           <div className="text-center">
-            <h1 className="text-xl font-bold text-white">GrindTracker</h1>
+            <h1 className="text-xl font-bold text-white">BrickByBrick</h1>
             <p className="text-zinc-500 text-sm mt-0.5">Sign in to your account</p>
           </div>
         </div>

@@ -9,14 +9,20 @@ const app = express();
 
 // CORS — allow the frontend origin (set CLIENT_URL in env, or allow all in dev)
 const allowedOrigins = process.env.CLIENT_URL
-  ? [process.env.CLIENT_URL]
+  ? [
+      process.env.CLIENT_URL.replace(/\/$/, ''), // strip trailing slash
+      process.env.CLIENT_URL.replace(/\/$/, '') + '/', // with trailing slash
+    ]
   : ['http://localhost:5173', 'http://localhost:3000'];
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, curl, Postman)
+    // Allow requests with no origin (Postman, curl, server-to-server)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // Normalize: strip trailing slash from incoming origin
+    const normalized = origin.replace(/\/$/, '');
+    const allowed = allowedOrigins.map(o => o.replace(/\/$/, ''));
+    if (allowed.includes(normalized)) return callback(null, true);
     callback(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
