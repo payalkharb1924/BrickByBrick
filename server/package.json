@@ -1,7 +1,7 @@
 {
-  "name": "grindtracker-server",
+  "name": "brickbybrick-server",
   "version": "1.0.0",
-  "description": "GrindTracker backend API",
+  "description": "BrickByBrick backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
