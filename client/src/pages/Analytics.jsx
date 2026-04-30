@@ -7,8 +7,8 @@ import useJobStore from '../store/jobStore';
 
 function StatCard({ label, value, sub, accent = '#EAB308', icon: Icon }) {
   return (
-    <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: '#161616', border: '1px solid #222' }}>
-      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#1e1e1e' }}>
+    <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
         <Icon size={15} style={{ color: accent }} />
       </div>
       <div>
@@ -34,7 +34,7 @@ function HBar({ label, value, max, color, right }) {
           <span className="font-semibold w-8 text-right" style={{ color }}>{pct}%</span>
         </div>
       </div>
-      <div className="h-2 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+      <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
         <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: color }} />
       </div>
     </div>
@@ -43,7 +43,7 @@ function HBar({ label, value, max, color, right }) {
 
 function Section({ title, icon: Icon, iconColor = '#EAB308', children }) {
   return (
-    <div className="rounded-xl p-5" style={{ background: '#161616', border: '1px solid #222' }}>
+    <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-center gap-2 mb-5">
         <Icon size={13} style={{ color: iconColor }} />
         <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{title}</h3>
@@ -120,7 +120,7 @@ function DSASection({ entries }) {
                     </div>
                     <span className="font-semibold text-yellow-400">{c}x</span>
                   </div>
-                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
                     <div className="h-full rounded-full" style={{ width: `${(c / maxPattern) * 100}%`, background: '#EAB308' }} />
                   </div>
                 </div>
@@ -141,7 +141,7 @@ function DSASection({ entries }) {
                     <span className="text-zinc-200 font-medium truncate">{t}</span>
                     <span className="text-zinc-500 ml-2 shrink-0">{c}</span>
                   </div>
-                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
                     <div className="h-full rounded-full" style={{ width: `${(c / maxTopic) * 100}%`, background: '#60a5fa' }} />
                   </div>
                 </div>
@@ -169,7 +169,7 @@ function DSASection({ entries }) {
                       <span className="font-semibold w-8 text-right" style={{ color }}>{rate}%</span>
                     </div>
                   </div>
-                  <div className="h-2 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+                  <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
                     <div className="h-full rounded-full" style={{ width: `${rate}%`, background: color }} />
                   </div>
                 </div>
@@ -245,7 +245,7 @@ function JobsSection({ applications }) {
                   <span className="text-zinc-300 font-medium">{src}</span>
                   <span className="text-zinc-500">{cnt}</span>
                 </div>
-                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
                   <div className="h-full rounded-full" style={{ width: `${(cnt / maxSource) * 100}%`, background: '#60a5fa' }} />
                 </div>
               </div>
@@ -281,7 +281,7 @@ function JobsSection({ applications }) {
             <HBar label="With Referral"    value={referrals}        max={total} color="#c084fc" right={`${referrals} apps`} />
             <HBar label="Without Referral" value={total - referrals} max={total} color="#555"   right={`${total - referrals} apps`} />
           </div>
-          <div className="mt-4 pt-4 grid grid-cols-2 gap-3" style={{ borderTop: '1px solid #222' }}>
+          <div className="mt-4 pt-4 grid grid-cols-2 gap-3" style={{ borderTop: '1px solid var(--border)' }}>
             <div className="text-center">
               <div className="text-lg font-bold" style={{ color: '#c084fc' }}>{referralRate}%</div>
               <div className="text-xs text-zinc-500">Referral Rate</div>
@@ -324,7 +324,7 @@ export default function Analytics() {
         <DSASection entries={entries} />
       </div>
 
-      <div className="h-px" style={{ background: '#1e1e1e' }} />
+      <div className="h-px" style={{ background: 'var(--bg-elevated)' }} />
 
       {/* Jobs section */}
       <div className="space-y-4">

@@ -5,9 +5,9 @@ import useReviewStore from '../../store/reviewStore';
 import Modal from '../Modal';
 
 const inputCls = 'w-full rounded-lg px-3 py-2 text-sm text-white outline-none transition-all placeholder-zinc-600';
-const inputStyle = { background: '#1a1a1a', border: '1px solid #2a2a2a' };
-const focusIn  = e => e.target.style.borderColor = '#EAB308';
-const focusOut = e => e.target.style.borderColor = '#2a2a2a';
+const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
+const focusIn  = e => e.target.style.borderColor = 'var(--accent)';
+const focusOut = e => e.target.style.borderColor = 'var(--border-input)';
 
 function EditModal({ review, onClose }) {
   const { updateReview } = useReviewStore();
@@ -50,7 +50,7 @@ function EditModal({ review, onClose }) {
   return (
     <Modal>
       <div className="rounded-xl p-6 w-full max-w-lg space-y-4 max-h-[90vh] overflow-y-auto"
-        style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-semibold text-white">
             Edit Review — <span style={{ color: '#EAB308' }}>{dayjs(review.weekStartDate).format('MMM D, YYYY')}</span>
@@ -99,12 +99,12 @@ function EditModal({ review, onClose }) {
         <div className="flex gap-3 pt-1">
           <button onClick={handleSave} disabled={saving}
             className="flex-1 text-black text-sm font-semibold py-2 rounded-lg disabled:opacity-50 flex items-center justify-center gap-1.5"
-            style={{ background: '#EAB308' }}>
+            style={{ background: 'var(--accent)' }}>
             <Zap size={13} /> {saving ? 'Saving...' : 'Save Changes'}
           </button>
           <button onClick={onClose}
             className="flex-1 text-zinc-300 text-sm py-2 rounded-lg"
-            style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
+            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>Cancel</button>
         </div>
       </div>
     </Modal>
@@ -127,11 +127,11 @@ function DeleteConfirm({ review, onClose }) {
 
   return (
     <Modal>
-      <div className="rounded-xl p-6 w-80 space-y-4" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+      <div className="rounded-xl p-6 w-80 space-y-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
         <h3 className="text-sm font-semibold text-white">Delete Review?</h3>
         <p className="text-xs text-zinc-400">
           This will permanently delete the review for week of{' '}
-          <span style={{ color: '#EAB308' }}>{dayjs(review.weekStartDate).format('MMM D, YYYY')}</span>.
+          <span style={{ color: 'var(--accent)' }}>{dayjs(review.weekStartDate).format('MMM D, YYYY')}</span>.
         </p>
         <div className="flex gap-3">
           <button onClick={handleDelete} disabled={deleting}
@@ -141,7 +141,7 @@ function DeleteConfirm({ review, onClose }) {
           </button>
           <button onClick={onClose}
             className="flex-1 text-zinc-300 text-sm py-2 rounded-lg"
-            style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
+            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>Cancel</button>
         </div>
       </div>
     </Modal>
@@ -156,10 +156,10 @@ export default function ReviewList({ reviews, loading, error, onRetry }) {
     return (
       <div className="space-y-3 animate-pulse">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="rounded-xl p-5 space-y-3" style={{ background: '#161616', border: '1px solid #222' }}>
-            <div className="h-4 rounded w-40" style={{ background: '#1e1e1e' }} />
+          <div key={i} className="rounded-xl p-5 space-y-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+            <div className="h-4 rounded w-40" style={{ background: 'var(--bg-elevated)' }} />
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-              {Array.from({ length: 6 }).map((__, j) => <div key={j} className="rounded-lg h-14" style={{ background: '#1e1e1e' }} />)}
+              {Array.from({ length: 6 }).map((__, j) => <div key={j} className="rounded-lg h-14" style={{ background: 'var(--bg-elevated)' }} />)}
             </div>
           </div>
         ))}
@@ -179,7 +179,7 @@ export default function ReviewList({ reviews, loading, error, onRetry }) {
 
   if (!reviews || reviews.length === 0) {
     return (
-      <div className="rounded-xl p-6" style={{ background: '#161616', border: '1px solid #222' }}>
+      <div className="rounded-xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
         <p className="text-zinc-500 text-sm">No reviews yet. Complete your first weekly review!</p>
       </div>
     );
@@ -190,14 +190,14 @@ export default function ReviewList({ reviews, loading, error, onRetry }) {
       <div className="space-y-3">
         {reviews.map((r) => (
           <div key={r._id} className="rounded-xl p-5 space-y-3 transition-all duration-200"
-            style={{ background: '#161616', border: '1px solid #222' }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = '#2a2a2a'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = '#222'}>
+            style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--border-input)'}
+            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}>
 
             {/* Header row */}
             <div className="flex items-center justify-between">
               <h3 className="text-white font-semibold text-sm">
-                Week of <span style={{ color: '#EAB308' }}>{dayjs(r.weekStartDate).format('MMM D, YYYY')}</span>
+                Week of <span style={{ color: 'var(--accent)' }}>{dayjs(r.weekStartDate).format('MMM D, YYYY')}</span>
               </h3>
               <div className="flex items-center gap-1">
                 <button onClick={() => setEditReview(r)}
@@ -216,7 +216,7 @@ export default function ReviewList({ reviews, loading, error, onRetry }) {
               {[['Problems', r.totalProblemsSolved],['Medium', r.mediumCount],['Hard', r.hardCount],
                 ['Applied', r.applicationsSent],['Referrals', r.referralsSent],['Responses', r.responsesReceived]
               ].map(([label, val]) => (
-                <div key={label} className="rounded-lg p-2" style={{ background: '#1e1e1e' }}>
+                <div key={label} className="rounded-lg p-2" style={{ background: 'var(--bg-elevated)' }}>
                   <div className="text-white font-bold text-lg">{val ?? 0}</div>
                   <div className="text-zinc-500 text-xs">{label}</div>
                 </div>
@@ -235,7 +235,7 @@ export default function ReviewList({ reviews, loading, error, onRetry }) {
 
             {r.nextWeekFocus && (
               <p className="text-zinc-400 text-xs flex items-center gap-1.5">
-                <Target size={12} style={{ color: '#EAB308' }} className="shrink-0" /> {r.nextWeekFocus}
+                <Target size={12} style={{ color: 'var(--accent)' }} className="shrink-0" /> {r.nextWeekFocus}
               </p>
             )}
 

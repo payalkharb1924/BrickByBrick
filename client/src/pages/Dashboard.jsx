@@ -50,9 +50,9 @@ function Ring({ value, max, sublabel, color = '#EAB308', size = 90 }) {
 
 function StatBigCard({ title, value, delta, deltaLabel, icon: Icon, linkTo, linkLabel }) {
   return (
-    <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: '#161616', border: '1px solid #222' }}>
+    <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-start justify-between">
-        <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: '#1e1e1e' }}>
+        <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
           {Icon && <Icon size={17} className="text-yellow-400" />}
         </div>
         <Sparkline />
@@ -81,7 +81,7 @@ function TodayOverview({ overview }) {
   if (!overview) return null;
   const { dsa, applications, revisions } = overview;
   return (
-    <div className="rounded-xl p-4" style={{ background: '#161616', border: '1px solid #222' }}>
+    <div className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <h3 className="text-sm font-semibold text-white mb-4">Today's Overview</h3>
       <div className="grid grid-cols-3 gap-4">
         {/* DSA Progress */}
@@ -155,21 +155,21 @@ const ACTIVITY_ICONS = {
 function RecentActivity({ activities }) {
   if (!activities || activities.length === 0) {
     return (
-      <div className="rounded-xl p-4" style={{ background: '#161616', border: '1px solid #222' }}>
+      <div className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
         <h3 className="text-sm font-semibold text-white mb-3">Recent Activity</h3>
         <p className="text-zinc-600 text-xs">No activity yet. Start solving problems or applying to jobs!</p>
       </div>
     );
   }
   return (
-    <div className="rounded-xl p-4" style={{ background: '#161616', border: '1px solid #222' }}>
+    <div className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <h3 className="text-sm font-semibold text-white mb-3">Recent Activity</h3>
       <div className="space-y-3">
         {activities.map((item, i) => {
           const { Icon, color } = ACTIVITY_ICONS[item.type] || { Icon: CheckCircle2, color: '#888' };
           return (
             <div key={i} className="flex items-start gap-3">
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: '#1e1e1e' }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--bg-elevated)' }}>
                 <Icon size={13} style={{ color }} />
               </div>
               <div className="flex-1 min-w-0">
@@ -201,7 +201,7 @@ function UpcomingPanel({ items }) {
   };
 
   return (
-    <div className="rounded-xl p-4" style={{ background: '#161616', border: '1px solid #222' }}>
+    <div className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-white">Upcoming</h3>
         <Link to="/revisions" className="text-xs text-yellow-400 hover:text-yellow-300 flex items-center gap-0.5">
@@ -217,11 +217,11 @@ function UpcomingPanel({ items }) {
             const when = formatWhen(item.date);
             return (
               <div key={i} className="flex items-center gap-2.5">
-                <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0" style={{ background: '#1e1e1e' }}>
+                <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0" style={{ background: 'var(--bg-elevated)' }}>
                   <Icon size={11} style={{ color }} />
                 </div>
                 <span className="flex-1 text-xs text-zinc-300 truncate">{item.text}</span>
-                <span className="text-xs shrink-0" style={{ color: when === 'Today' ? '#EAB308' : '#666' }}>{when}</span>
+                <span className="text-xs shrink-0" style={{ color: when === 'Today' ? 'var(--accent)' : '#666' }}>{when}</span>
               </div>
             );
           })}
@@ -233,7 +233,7 @@ function UpcomingPanel({ items }) {
 
 function FocusPanel({ focus }) {
   return (
-    <div className="rounded-xl p-4" style={{ background: '#161616', border: '1px solid #222' }}>
+    <div className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <h3 className="text-sm font-semibold text-white mb-3">Focus for This Week</h3>
       <div className="space-y-3">
         <div>
@@ -249,7 +249,7 @@ function FocusPanel({ focus }) {
           </div>
         </div>
         <div className="flex justify-end">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: '#1e1e1e' }}>
+          <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
             <Target size={16} className="text-yellow-400" />
           </div>
         </div>
@@ -302,7 +302,7 @@ export default function Dashboard() {
             </h1>
             <p className="text-xs text-zinc-500 mt-0.5">Keep building, one brick at a time.</p>
           </div>
-          <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-xl shrink-0" style={{ background: '#1a1500', border: '1px solid #3f3000' }}>
+          <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-xl shrink-0" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
             <TrendingUp size={15} className="text-yellow-400 shrink-0" />
             <span className="text-xs text-yellow-400 font-medium italic">"Discipline today, offers tomorrow."</span>
             <TrendingUp size={15} className="text-yellow-400 shrink-0" />
@@ -339,7 +339,7 @@ export default function Dashboard() {
       </div>
 
       {/* Right panel */}
-      <div className="hidden xl:flex flex-col w-64 shrink-0 p-4 gap-4 overflow-y-auto" style={{ borderLeft: '1px solid #1e1e1e' }}>
+      <div className="hidden xl:flex flex-col w-64 shrink-0 p-4 gap-4 overflow-y-auto" style={{ borderLeft: '1px solid var(--border-sub)' }}>
         <UpcomingPanel items={upcoming} />
         <FocusPanel focus={focus} />
       </div>

@@ -10,9 +10,9 @@ const defaultForm = () => ({
   date: dayjs().format('YYYY-MM-DD'),
 });
 
-const inputStyle = { background: '#1a1a1a', border: '1px solid #2a2a2a' };
-const focusIn  = e => e.target.style.borderColor = '#EAB308';
-const focusOut = e => e.target.style.borderColor = '#2a2a2a';
+const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
+const focusIn  = e => e.target.style.borderColor = 'var(--accent)';
+const focusOut = e => e.target.style.borderColor = 'var(--border-input)';
 
 export default function DSAForm({ onSuccess }) {
   const [form, setForm] = useState(defaultForm());
@@ -56,15 +56,14 @@ export default function DSAForm({ onSuccess }) {
   return (
     <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}
       className="rounded-xl p-6 space-y-5"
-      style={{ background: '#161616', border: '1px solid #222' }}>
+      style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <h2 className="text-base font-semibold text-white">Add Problem</h2>
 
       {feedback && (
         <div className="rounded-lg px-4 py-3 text-sm font-medium flex items-center gap-2"
           style={feedback.type === 'success'
             ? { background: '#081a0a', border: '1px solid #153f18', color: '#4ade80' }
-            : { background: '#1a0808', border: '1px solid #3f1515', color: '#f87171' }}>
-          {feedback.msg}
+            : { background: '#1a0808', border: '1px solid #3f1515', color: '#f87171' }}>          {feedback.msg}
         </div>
       )}
 
@@ -131,8 +130,8 @@ export default function DSAForm({ onSuccess }) {
           <div className="mt-2 rounded-lg px-3 py-2.5 text-sm" style={{ background: '#1a1500', border: '1px solid #3f3000', color: '#EAB308' }}>
             Writing your mistake helps you improve. Are you sure you want to skip?
             <div className="flex gap-3 mt-2">
-              <button type="submit" className="text-xs px-3 py-1 rounded-lg font-medium text-black" style={{ background: '#EAB308' }}>Yes, skip</button>
-              <button type="button" onClick={() => setMistakeWarning(false)} className="text-xs px-3 py-1 rounded-lg text-zinc-300" style={{ background: '#2a2a2a' }}>Let me add it</button>
+              <button type="submit" className="text-xs px-3 py-1 rounded-lg font-medium text-black" style={{ background: 'var(--accent)' }}>Yes, skip</button>
+              <button type="button" onClick={() => setMistakeWarning(false)} className="text-xs px-3 py-1 rounded-lg text-zinc-300" style={{ background: 'var(--bg-elevated)' }}>Let me add it</button>
             </div>
           </div>
         )}
@@ -149,7 +148,7 @@ export default function DSAForm({ onSuccess }) {
       {!mistakeWarning && (
         <button type="submit" disabled={loading}
           className="w-full font-semibold py-2.5 rounded-lg text-sm transition-all disabled:opacity-50 text-black"
-          style={{ background: '#EAB308' }}>
+          style={{ background: 'var(--accent)' }}>
           {loading ? 'Saving...' : 'Add Problem'}
         </button>
       )}

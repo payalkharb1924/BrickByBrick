@@ -56,7 +56,7 @@ export default function Jobs() {
         </div>
       )}
 
-      <div className="flex gap-1 border-b" style={{ borderColor: '#1f1f1f' }}>
+      <div className="flex gap-1 border-b" style={{ borderColor: 'var(--border-sub)' }}>
         {TABS.map((tab) => (
           <button key={tab} onClick={() => setActiveTab(tab)}
             className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${activeTab === tab ? 'border-yellow-400 text-yellow-400' : 'border-transparent text-zinc-500 hover:text-white'}`}>

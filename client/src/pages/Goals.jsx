@@ -4,7 +4,7 @@ import useGoalStore from '../store/goalStore';
 
 const CATEGORIES = ['DSA', 'Jobs', 'Learning', 'Personal'];
 const inputCls = 'rounded-lg px-3 py-2 text-sm text-white outline-none w-full placeholder-zinc-600';
-const inputStyle = { background: '#1a1a1a', border: '1px solid #2a2a2a' };
+const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
 
 export default function Goals() {
   const { goals, loading, fetchGoals, createGoal, updateGoal, deleteGoal } = useGoalStore();
@@ -36,13 +36,13 @@ export default function Goals() {
         </div>
         <button onClick={() => setShowForm(v => !v)}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-black"
-          style={{ background: '#EAB308' }}>
+          style={{ background: 'var(--accent)' }}>
           <Plus size={13} /> Add Goal
         </button>
       </div>
 
       {showForm && (
-        <div className="rounded-xl p-4 space-y-3" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+        <div className="rounded-xl p-4 space-y-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
           <h3 className="text-sm font-semibold text-white">New Goal</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
@@ -69,15 +69,15 @@ export default function Goals() {
             </div>
           </div>
           <div className="flex gap-2">
-            <button onClick={addGoal} className="px-4 py-1.5 rounded-lg text-xs font-semibold text-black" style={{ background: '#EAB308' }}>Save Goal</button>
-            <button onClick={() => setShowForm(false)} className="px-4 py-1.5 rounded-lg text-xs text-zinc-400" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
+            <button onClick={addGoal} className="px-4 py-1.5 rounded-lg text-xs font-semibold text-black" style={{ background: 'var(--accent)' }}>Save Goal</button>
+            <button onClick={() => setShowForm(false)} className="px-4 py-1.5 rounded-lg text-xs text-zinc-400" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>Cancel</button>
           </div>
         </div>
       )}
 
       {loading ? (
         <div className="animate-pulse space-y-2">
-          {[0,1,2].map(i => <div key={i} className="h-20 rounded-xl" style={{ background: '#161616' }} />)}
+          {[0,1,2].map(i => <div key={i} className="h-20 rounded-xl" style={{ background: 'var(--bg-card)' }} />)}
         </div>
       ) : (
         <>
@@ -90,7 +90,7 @@ export default function Goals() {
                 {active.map(g => {
                   const pct = g.target > 0 ? Math.round((g.current / g.target) * 100) : 0;
                   return (
-                    <div key={g._id} className="rounded-xl p-4" style={{ background: '#161616', border: '1px solid #222' }}>
+                    <div key={g._id} className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
                       <div className="flex items-start justify-between gap-3 mb-3">
                         <div className="flex items-start gap-2.5">
                           <button onClick={() => toggle(g)} className="mt-0.5 text-zinc-500 hover:text-yellow-400 transition-colors">
@@ -98,7 +98,7 @@ export default function Goals() {
                           </button>
                           <div>
                             <div className="text-sm font-medium text-white">{g.title}</div>
-                            <span className="text-xs px-1.5 py-0.5 rounded mt-1 inline-block" style={{ background: '#1e1e1e', color: '#EAB308' }}>{g.category}</span>
+                            <span className="text-xs px-1.5 py-0.5 rounded mt-1 inline-block" style={{ background: 'var(--bg-elevated)', color: 'var(--accent)' }}>{g.category}</span>
                           </div>
                         </div>
                         <button onClick={() => remove(g._id)} className="text-zinc-600 hover:text-red-400 transition-colors shrink-0">
@@ -106,14 +106,14 @@ export default function Goals() {
                         </button>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: '#2a2a2a' }}>
-                          <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: '#EAB308' }} />
+                        <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--border-input)' }}>
+                          <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: 'var(--accent)' }} />
                         </div>
                         <div className="flex items-center gap-1 shrink-0">
                           <input type="number" min="0" max={g.target} value={g.current}
                             onChange={e => updateProgress(g, e.target.value)}
                             className="w-12 text-center rounded px-1 py-0.5 text-xs text-white outline-none"
-                            style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }} />
+                            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }} />
                           <span className="text-xs text-zinc-500">/ {g.target}</span>
                           <span className="text-xs font-semibold text-yellow-400 ml-1">{pct}%</span>
                         </div>
@@ -130,7 +130,7 @@ export default function Goals() {
               <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">Completed ({completed.length})</h2>
               <div className="space-y-2">
                 {completed.map(g => (
-                  <div key={g._id} className="rounded-xl p-3 flex items-center gap-3 opacity-50" style={{ background: '#161616', border: '1px solid #222' }}>
+                  <div key={g._id} className="rounded-xl p-3 flex items-center gap-3 opacity-50" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
                     <button onClick={() => toggle(g)} className="text-green-400">
                       <CheckCircle2 size={16} />
                     </button>

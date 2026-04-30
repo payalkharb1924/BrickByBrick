@@ -13,9 +13,9 @@ const defaultForm = (prefill) => ({
   dsaEntry: prefill?.dsaEntryId || '',
 });
 
-const inputStyle = { background: '#1a1a1a', border: '1px solid #2a2a2a' };
-const focusIn  = e => e.target.style.borderColor = '#EAB308';
-const focusOut = e => e.target.style.borderColor = '#2a2a2a';
+const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
+const focusIn  = e => e.target.style.borderColor = 'var(--accent)';
+const focusOut = e => e.target.style.borderColor = 'var(--border-input)';
 
 export default function MistakeForm({ prefill, onSuccess }) {
   const [form, setForm] = useState(defaultForm(prefill));
@@ -58,7 +58,7 @@ export default function MistakeForm({ prefill, onSuccess }) {
   return (
     <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}
       className="rounded-xl p-6 space-y-5"
-      style={{ background: '#161616', border: '1px solid #222' }}>
+      style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <h2 className="text-base font-semibold text-white">Log a Mistake</h2>
 
       {feedback && (
@@ -101,7 +101,7 @@ export default function MistakeForm({ prefill, onSuccess }) {
 
       <button type="submit" disabled={loading}
         className="w-full font-semibold py-2.5 rounded-lg text-sm transition-all disabled:opacity-50 text-black"
-        style={{ background: '#EAB308' }}>
+        style={{ background: 'var(--accent)' }}>
         {loading ? 'Saving...' : 'Log Mistake'}
       </button>
     </form>

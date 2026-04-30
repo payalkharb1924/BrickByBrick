@@ -20,16 +20,16 @@ function overdueLabel(revisionDates) {
 export default function RevisionSection({ revisions }) {
   if (!revisions || revisions.length === 0) {
     return (
-      <div className="rounded-xl p-6" style={{ background: '#161616', border: '1px solid #222' }}>
+      <div className="rounded-xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
         <h2 className="text-sm font-semibold text-white mb-3">Revisions Due</h2>
-        <p className="text-zinc-500 text-sm flex items-center gap-1.5"><PartyPopper size={14} style={{ color: '#EAB308' }} /> No revisions due. Keep it up!</p>
+        <p className="text-zinc-500 text-sm flex items-center gap-1.5"><PartyPopper size={14} style={{ color: 'var(--accent)' }} /> No revisions due. Keep it up!</p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl p-6" style={{ background: '#161616', border: '1px solid #222' }}>
-      <h2 className="text-sm font-semibold text-white mb-4">Revisions Due <span style={{ color: '#EAB308' }}>({revisions.length})</span></h2>
+    <div className="rounded-xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+      <h2 className="text-sm font-semibold text-white mb-4">Revisions Due <span style={{ color: 'var(--accent)' }}>({revisions.length})</span></h2>
       <div className="space-y-2">
         {revisions.map((entry) => {
           const info = overdueLabel(entry.revisionDates);

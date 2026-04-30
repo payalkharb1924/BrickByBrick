@@ -4,7 +4,7 @@ import useResourceStore from '../store/resourceStore';
 
 const CATEGORIES = ['DSA', 'System Design', 'Behavioral', 'Resume', 'Other'];
 const inputCls = 'rounded-lg px-3 py-2 text-sm text-white outline-none w-full placeholder-zinc-600';
-const inputStyle = { background: '#1a1a1a', border: '1px solid #2a2a2a' };
+const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
 
 export default function Resources() {
   const { resources, loading, fetchResources, createResource, updateResource, deleteResource } = useResourceStore();
@@ -33,7 +33,7 @@ export default function Resources() {
         </div>
         <button onClick={() => setShowForm(v => !v)}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-black"
-          style={{ background: '#EAB308' }}>
+          style={{ background: 'var(--accent)' }}>
           <Plus size={13} /> Add Resource
         </button>
       </div>
@@ -43,14 +43,14 @@ export default function Resources() {
         {['All', ...CATEGORIES].map(c => (
           <button key={c} onClick={() => setFilter(c)}
             className="px-3 py-1 rounded-lg text-xs font-medium transition-colors"
-            style={filter === c ? { background: '#EAB308', color: '#000' } : { background: '#1e1e1e', color: '#888' }}>
+            style={filter === c ? { background: 'var(--accent)', color: '#000' } : { background: 'var(--bg-elevated)', color: 'var(--text-muted)' }}>
             {c}
           </button>
         ))}
       </div>
 
       {showForm && (
-        <div className="rounded-xl p-4 space-y-3" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+        <div className="rounded-xl p-4 space-y-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
           <h3 className="text-sm font-semibold text-white">Add Resource</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
@@ -73,26 +73,26 @@ export default function Resources() {
             </div>
           </div>
           <div className="flex gap-2">
-            <button onClick={add} className="px-4 py-1.5 rounded-lg text-xs font-semibold text-black" style={{ background: '#EAB308' }}>Save</button>
-            <button onClick={() => setShowForm(false)} className="px-4 py-1.5 rounded-lg text-xs text-zinc-400" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
+            <button onClick={add} className="px-4 py-1.5 rounded-lg text-xs font-semibold text-black" style={{ background: 'var(--accent)' }}>Save</button>
+            <button onClick={() => setShowForm(false)} className="px-4 py-1.5 rounded-lg text-xs text-zinc-400" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>Cancel</button>
           </div>
         </div>
       )}
 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 animate-pulse">
-          {[0,1,2,3].map(i => <div key={i} className="h-28 rounded-xl" style={{ background: '#161616' }} />)}
+          {[0,1,2,3].map(i => <div key={i} className="h-28 rounded-xl" style={{ background: 'var(--bg-card)' }} />)}
         </div>
       ) : resources.length === 0 ? (
         <div className="text-zinc-600 text-sm py-8 text-center">No resources yet. Add your first one!</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {resources.map(r => (
-            <div key={r._id} className="rounded-xl p-4 flex flex-col gap-2" style={{ background: '#161616', border: '1px solid #222' }}>
+            <div key={r._id} className="rounded-xl p-4 flex flex-col gap-2" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1 min-w-0">
                   <div className="text-sm font-medium text-white truncate">{r.title}</div>
-                  <span className="text-xs px-1.5 py-0.5 rounded mt-1 inline-block" style={{ background: '#1e1e1e', color: '#EAB308' }}>{r.category}</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded mt-1 inline-block" style={{ background: 'var(--bg-elevated)', color: 'var(--accent)' }}>{r.category}</span>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
                   <button onClick={() => toggleStar(r)} className={`transition-colors ${r.starred ? 'text-yellow-400' : 'text-zinc-600 hover:text-yellow-400'}`}>

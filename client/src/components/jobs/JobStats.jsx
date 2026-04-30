@@ -10,8 +10,8 @@ const STATUS_CONFIG = {
 
 function MiniStatCard({ label, value, sub, icon: Icon, accent = '#EAB308' }) {
   return (
-    <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: '#161616', border: '1px solid #222' }}>
-      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#1e1e1e' }}>
+    <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
         <Icon size={15} style={{ color: accent }} />
       </div>
       <div>
@@ -38,7 +38,7 @@ function StatusBar({ name, value, total }) {
           <span className="font-semibold w-8 text-right" style={{ color: cfg.color }}>{pct}%</span>
         </div>
       </div>
-      <div className="h-2 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+      <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
         <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: cfg.color }} />
       </div>
     </div>
@@ -59,7 +59,7 @@ function SourceBreakdown({ applications }) {
             <span className="text-zinc-300 font-medium">{src || 'Unknown'}</span>
             <span className="text-zinc-500">{cnt}</span>
           </div>
-          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
             <div className="h-full rounded-full" style={{ width: `${(cnt / max) * 100}%`, background: '#60a5fa' }} />
           </div>
         </div>
@@ -71,7 +71,7 @@ function SourceBreakdown({ applications }) {
 export default function JobStats({ applications }) {
   if (!applications || applications.length === 0) {
     return (
-      <div className="rounded-xl p-8 text-center" style={{ background: '#161616', border: '1px solid #222' }}>
+      <div className="rounded-xl p-8 text-center" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
         <Send size={32} className="text-zinc-700 mx-auto mb-3" />
         <p className="text-zinc-500 text-sm">No applications yet. Start applying!</p>
       </div>
@@ -101,7 +101,7 @@ export default function JobStats({ applications }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Status breakdown */}
-        <div className="rounded-xl p-5" style={{ background: '#161616', border: '1px solid #222' }}>
+        <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-5">
             <TrendingUp size={13} className="text-yellow-400" />
             <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Application Status</h3>
@@ -114,7 +114,7 @@ export default function JobStats({ applications }) {
         </div>
 
         {/* Source breakdown */}
-        <div className="rounded-xl p-5" style={{ background: '#161616', border: '1px solid #222' }}>
+        <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-5">
             <Send size={13} className="text-blue-400" />
             <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Application Sources</h3>
@@ -123,7 +123,7 @@ export default function JobStats({ applications }) {
         </div>
 
         {/* Funnel summary */}
-        <div className="rounded-xl p-5 lg:col-span-2" style={{ background: '#161616', border: '1px solid #222' }}>
+        <div className="rounded-xl p-5 lg:col-span-2" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-5">
             <XCircle size={13} className="text-zinc-500" />
             <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Conversion Funnel</h3>

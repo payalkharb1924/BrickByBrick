@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, User, Bell, Palette, Shield, Sun, Moon, Check, BellOff } from 'lucide-react';
+import { Settings as SettingsIcon, User, Bell, Palette, Shield, Sun, Moon, Check, BellOff, Sparkles } from 'lucide-react';
 import useAuthStore from '../store/authStore';
 import api from '../api/client';
 import { checkAndNotify } from '../utils/notifications';
+import useThemeStore from '../store/themeStore';
 
-const inputStyle = { background: '#1a1a1a', border: '1px solid #2a2a2a' };
+const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
 
 function Card({ icon: Icon, title, children }) {
   return (
-    <div className="rounded-xl p-5 space-y-4" style={{ background: '#161616', border: '1px solid #222' }}>
-      <div className="flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid #222' }}>
+    <div className="rounded-xl p-5 space-y-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+      <div className="flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
         <Icon size={14} className="text-yellow-400" />
         <h3 className="text-sm font-semibold text-white">{title}</h3>
       </div>
@@ -22,7 +23,7 @@ function Toggle({ checked, onChange }) {
   return (
     <button onClick={() => onChange(!checked)}
       className="relative w-10 h-5 rounded-full transition-colors shrink-0"
-      style={{ background: checked ? '#EAB308' : '#2a2a2a' }}>
+      style={{ background: checked ? 'var(--accent)' : 'var(--border-input)' }}>
       <span className="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all"
         style={{ left: checked ? '22px' : '2px' }} />
     </button>
@@ -70,8 +71,8 @@ function fireNotifications(alerts, notifs) {
 export default function Settings() {
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
+  const { theme, setTheme } = useThemeStore();
 
-  const [theme, setTheme] = useState(localStorage.getItem('bbb_theme') || 'dark');
   const [dailyTarget, setDailyTarget] = useState(localStorage.getItem('bbb_daily_target') || '4');
   const [notifs, setNotifs] = useState(() => {
     try { return JSON.parse(localStorage.getItem('bbb_notifs')) || { revisions: true, followups: true, weekly: true }; }
@@ -87,7 +88,6 @@ export default function Settings() {
   }, []);
 
   const saveSettings = () => {
-    localStorage.setItem('bbb_theme', theme);
     localStorage.setItem('bbb_daily_target', dailyTarget);
     localStorage.setItem('bbb_notifs', JSON.stringify(notifs));
     setSaved(true);
@@ -155,7 +155,7 @@ export default function Settings() {
         </div>
         <button onClick={saveSettings}
           className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-black transition-all"
-          style={{ background: '#EAB308' }}>
+          style={{ background: 'var(--accent)' }}>
           {saved ? <><Check size={14} /> Saved!</> : 'Save Settings'}
         </button>
       </div>
@@ -167,9 +167,9 @@ export default function Settings() {
 
           {/* Profile */}
           <Card icon={User} title="Profile">
-            <div className="flex items-center gap-4 p-3 rounded-xl" style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}>
+            <div className="flex items-center gap-4 p-3 rounded-xl" style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }}>
               <div className="w-12 h-12 rounded-full flex items-center justify-center text-base font-bold text-black shrink-0"
-                style={{ background: '#EAB308' }}>
+                style={{ background: 'var(--accent)' }}>
                 {initials}
               </div>
               <div>
@@ -181,25 +181,25 @@ export default function Settings() {
           </Card>
 
           {/* Preferences — flex-1 so it stretches to fill remaining height */}
-          <div className="flex-1 rounded-xl p-5 space-y-4" style={{ background: '#161616', border: '1px solid #222' }}>
-            <div className="flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid #222' }}>
+          <div className="flex-1 rounded-xl p-5 space-y-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+            <div className="flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
               <Palette size={14} className="text-yellow-400" />
               <h3 className="text-sm font-semibold text-white">Preferences</h3>
             </div>
             <div>
               <label className="block text-xs text-zinc-500 mb-2">Theme</label>
               <div className="flex gap-2">
-                {[['dark', 'Dark', Moon], ['light', 'Light', Sun]].map(([val, label, Icon]) => (
+                {[['dark', 'Dark', Moon], ['cool', 'Cool', Sparkles]].map(([val, label, Icon]) => (
                   <button key={val} onClick={() => setTheme(val)}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
                     style={theme === val
-                      ? { background: '#EAB308', color: '#000' }
-                      : { background: '#1e1e1e', color: '#888', border: '1px solid #2a2a2a' }}>
+                      ? { background: val === 'cool' ? '#FB2576' : 'var(--accent)', color: '#fff' }
+                      : { background: 'var(--bg-elevated)', color: 'var(--text-muted)', border: '1px solid var(--border-input)' }}>
                     <Icon size={14} /> {label}
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-zinc-600 mt-2">Save to apply theme preference</p>
+              <p className="text-xs text-zinc-600 mt-2">Theme applies instantly — no save needed</p>
             </div>
             <div>
               <label className="block text-xs text-zinc-500 mb-1">Daily DSA Target</label>
@@ -235,7 +235,7 @@ export default function Settings() {
             )}
 
             {/* Permission status */}
-            <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: '#1a1a1a' }}>
+            <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--bg-input)' }}>
               <div>
                 <div className="text-sm text-white flex items-center gap-2">
                   {notifPerm === 'granted' ? <Bell size={13} className="text-yellow-400" /> : <BellOff size={13} className="text-zinc-500" />}
@@ -248,13 +248,13 @@ export default function Settings() {
               {notifPerm !== 'granted' ? (
                 <button onClick={handleEnableNotifications}
                   className="text-xs px-3 py-1.5 rounded-lg font-medium text-black"
-                  style={{ background: '#EAB308' }}>
+                  style={{ background: 'var(--accent)' }}>
                   Enable
                 </button>
               ) : (
                 <button onClick={handleTestNotifications}
                   className="text-xs px-3 py-1.5 rounded-lg font-medium text-zinc-300"
-                  style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>
+                  style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>
                   Test
                 </button>
               )}
@@ -279,7 +279,7 @@ export default function Settings() {
             {notifPerm === 'granted' && (
               <button onClick={handleFireNow}
                 className="w-full text-xs py-2 rounded-lg text-zinc-300 transition-colors"
-                style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>
+                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>
                 Fire notifications now (based on current alerts)
               </button>
             )}
@@ -288,14 +288,14 @@ export default function Settings() {
           {/* Account */}
           <Card icon={Shield} title="Account">
             <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: '#1a1a1a' }}>
+              <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--bg-input)' }}>
                 <div>
                   <div className="text-sm text-white">Account Status</div>
                   <div className="text-xs text-zinc-500 mt-0.5">Active member</div>
                 </div>
                 <span className="text-xs px-2 py-1 rounded-full font-medium" style={{ background: '#0f2a0f', color: '#4ade80' }}>Active</span>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: '#1a1a1a' }}>
+              <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--bg-input)' }}>
                 <div>
                   <div className="text-sm text-white">Sign out</div>
                   <div className="text-xs text-zinc-500 mt-0.5">Sign out of your BrickByBrick account</div>

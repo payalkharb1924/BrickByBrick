@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate, Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import {
   LayoutDashboard, Code2, Briefcase, ClipboardList, AlertTriangle,
-  LogOut, Menu, Bell, Calendar, Search, ChevronDown,
+  LogOut, Menu, Bell, Calendar, Search, ChevronDown, Zap,
   BarChart2, Target, BookOpen, Settings, RefreshCw, Flame,
   User, ChevronLeft, ChevronRight as ChevronRightIcon, X
 } from 'lucide-react';
@@ -59,11 +59,11 @@ function MiniCalendar({ onClose, upcoming }) {
   for (let i = 0; i < startDay; i++) cells.push(null);
   for (let d = 1; d <= daysInMonth; d++) cells.push(d);
 
-  const dotColor = { revision: '#EAB308', followup: '#fb923c', review: '#60a5fa' };
+  const dotColor = { revision: 'var(--accent)', followup: '#fb923c', review: '#60a5fa' };
 
   return (
     <div className="absolute right-0 top-full mt-2 z-50 rounded-xl p-4 shadow-2xl"
-      style={{ background: '#161616', border: '1px solid #2a2a2a', width: '280px' }}>
+      style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)', width: '280px' }}>
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <button onClick={() => setCurrent(c => c.subtract(1, 'month'))} className="p-1 rounded text-zinc-400 hover:text-white">
@@ -107,7 +107,7 @@ function MiniCalendar({ onClose, upcoming }) {
       </div>
 
       {/* Legend */}
-      <div className="mt-3 pt-3 space-y-1.5" style={{ borderTop: '1px solid #222' }}>
+      <div className="mt-3 pt-3 space-y-1.5" style={{ borderTop: '1px solid var(--border)' }}>
         <div className="text-xs text-zinc-500 mb-2">Today: <span className="text-yellow-400 font-medium">{today.format('D MMM YYYY')}</span></div>
         <div className="flex items-center gap-4 text-xs text-zinc-500">
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-yellow-400" /> Revision</span>
@@ -133,12 +133,12 @@ function NotificationsPanel({ alerts, onClose }) {
 
   return (
     <div className="absolute right-0 top-full mt-2 z-50 rounded-xl w-72 shadow-2xl overflow-hidden"
-      style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
-      <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid #222' }}>
+      style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
+      <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid var(--border)' }}>
         <span className="text-xs font-semibold text-white">Notifications</span>
         <button onClick={onClose} className="text-zinc-500 hover:text-white"><X size={13} /></button>
       </div>
-      <div className="divide-y" style={{ borderColor: '#222' }}>
+      <div className="divide-y" style={{ borderColor: 'var(--border)' }}>
         {items.map((item, i) => (
           <div key={i} className="px-4 py-3 flex items-start gap-3">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
@@ -155,9 +155,9 @@ function NotificationsPanel({ alerts, onClose }) {
 function UserDropdown({ displayName, initials, onLogout, onClose }) {
   return (
     <div className="absolute right-0 top-full mt-2 z-50 rounded-xl w-52 shadow-2xl overflow-hidden"
-      style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+      style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
       {/* Profile header */}
-      <div className="px-4 py-3 flex items-center gap-3" style={{ borderBottom: '1px solid #222' }}>
+      <div className="px-4 py-3 flex items-center gap-3" style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-black shrink-0"
           style={{ background: '#EAB308' }}>{initials}</div>
         <div className="min-w-0">
@@ -232,7 +232,7 @@ export default function Layout() {
     : 0;
 
   return (
-    <div className="flex h-screen overflow-hidden" style={{ background: '#0d0d0d' }}>
+    <div className="flex h-screen overflow-hidden" style={{ background: 'var(--bg)' }}>
       {sidebarOpen && (
         <div className="fixed inset-0 z-20 bg-black/70 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
@@ -242,11 +242,14 @@ export default function Layout() {
         fixed lg:static inset-y-0 left-0 z-30 w-52 flex flex-col shrink-0
         transform transition-transform duration-200
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-      `} style={{ background: '#111', borderRight: '1px solid #1e1e1e' }}>
+      `} style={{ background: 'var(--bg-sub)', borderRight: '1px solid var(--border-sub)' }}>
 
-        <div className="px-4 py-4 flex items-center gap-2.5" style={{ borderBottom: '1px solid #1e1e1e' }}>
-          <B3Logo size={30} />
-          <div className="text-sm font-bold text-white leading-tight">BrickByBrick</div>
+        <div className="px-4 py-4 flex items-center gap-2.5" style={{ borderBottom: '1px solid var(--border-sub)' }}>
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+            style={{ background: 'var(--accent)' }}>
+            <Zap size={14} color="#000" strokeWidth={2.5} />
+          </div>
+          <div className="text-sm font-bold leading-tight" style={{ color: 'var(--accent)' }}>BrickByBrick</div>
         </div>
 
         <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
@@ -254,9 +257,10 @@ export default function Layout() {
             <NavLink key={to} to={to} end={to === '/'} onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-150 ${
-                  isActive ? 'bg-yellow-400 text-black' : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  isActive ? 'text-white' : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`
-              }>
+              }
+              style={({ isActive }) => isActive ? { background: 'var(--accent)', color: isActive ? '#fff' : undefined } : {}}>
               <Icon size={14} />
               {label}
             </NavLink>
@@ -264,8 +268,8 @@ export default function Layout() {
         </nav>
 
         {/* Daily streak badge */}
-        <div className="px-3 py-3" style={{ borderTop: '1px solid #1e1e1e' }}>
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: '#1a1a1a' }}>
+        <div className="px-3 py-3" style={{ borderTop: '1px solid var(--border-sub)' }}>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: 'var(--bg-input)' }}>
             <Flame size={16} className="text-yellow-400 shrink-0" />
             <div>
               <div className="text-xs font-bold text-yellow-400">Streak</div>
@@ -281,7 +285,7 @@ export default function Layout() {
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
 
         {/* Top Navbar */}
-        <header className="flex items-center gap-3 px-4 py-2.5 shrink-0" style={{ background: '#111', borderBottom: '1px solid #1e1e1e' }}>
+        <header className="flex items-center gap-3 px-4 py-2.5 shrink-0" style={{ background: 'var(--bg-sub)', borderBottom: '1px solid var(--border-sub)' }}>
           <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5">
             <Menu size={18} />
           </button>
@@ -292,7 +296,7 @@ export default function Layout() {
             <input value={searchVal} onChange={e => setSearchVal(e.target.value)}
               placeholder="Search anything..."
               className="w-full pl-8 pr-10 py-1.5 rounded-lg text-xs text-white placeholder-zinc-500 outline-none"
-              style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }} />
+              style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }} />
             <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-600 text-xs">⌘K</span>
           </div>
 
@@ -340,7 +344,7 @@ export default function Layout() {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto" style={{ background: '#0d0d0d' }}>
+        <main className="flex-1 overflow-y-auto" style={{ background: 'var(--bg)' }}>
           <div className="page-enter">
             <Outlet />
           </div>

@@ -16,9 +16,9 @@ const defaultForm = () => ({
   weakTopics: '', nextWeekFocus: '', insights: '',
 });
 
-const inputStyle = { background: '#1a1a1a', border: '1px solid #2a2a2a' };
-const focusIn  = e => e.target.style.borderColor = '#EAB308';
-const focusOut = e => e.target.style.borderColor = '#2a2a2a';
+const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
+const focusIn  = e => e.target.style.borderColor = 'var(--accent)';
+const focusOut = e => e.target.style.borderColor = 'var(--border-input)';
 
 export default function ReviewForm({ onSuccess }) {
   const { createReview, fetchAutofill, autofill, loading } = useReviewStore();
@@ -66,12 +66,12 @@ export default function ReviewForm({ onSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-xl p-6 space-y-6" style={{ background: '#161616', border: '1px solid #222' }}>
+    <form onSubmit={handleSubmit} className="rounded-xl p-6 space-y-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-center justify-between">
         <h2 className="text-base font-semibold text-white">Weekly Review</h2>
         <button type="button" onClick={handleAutofill} disabled={autofilling}
           className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all disabled:opacity-50 text-black"
-          style={{ background: '#EAB308' }}>
+          style={{ background: 'var(--accent)' }}>
           <Zap size={12} />
           {autofilling ? 'Loading...' : 'Auto-fill Stats'}
         </button>
@@ -155,7 +155,7 @@ export default function ReviewForm({ onSuccess }) {
 
       <button type="submit" disabled={loading}
         className="w-full font-semibold py-2.5 rounded-lg text-sm transition-all disabled:opacity-50 text-black"
-        style={{ background: '#EAB308' }}>
+        style={{ background: 'var(--accent)' }}>
         {loading ? 'Saving...' : 'Save Review'}
       </button>
     </form>

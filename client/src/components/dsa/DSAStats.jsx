@@ -9,7 +9,7 @@ const DIFF = {
 
 function MiniStatCard({ label, value, sub }) {
   return (
-    <div className="rounded-xl p-4 flex flex-col gap-1" style={{ background: '#161616', border: '1px solid #222' }}>
+    <div className="rounded-xl p-4 flex flex-col gap-1" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="text-2xl font-bold text-yellow-400">{value}</div>
       <div className="text-xs font-medium text-white">{label}</div>
       {sub && <div className="text-xs text-zinc-600">{sub}</div>}
@@ -31,7 +31,7 @@ function DiffBar({ label, value, total, color, bg }) {
           <span className="font-semibold w-8 text-right" style={{ color }}>{pct}%</span>
         </div>
       </div>
-      <div className="h-2 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+      <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
         <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: color }} />
       </div>
     </div>
@@ -57,7 +57,7 @@ function TopPatterns({ entries }) {
             </div>
             <span className="font-semibold text-yellow-400">{count}x</span>
           </div>
-          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
             <div className="h-full rounded-full" style={{ width: `${(count / max) * 100}%`, background: '#EAB308' }} />
           </div>
         </div>
@@ -82,7 +82,7 @@ function TopTopics({ entries }) {
             <span className="text-zinc-200 font-medium truncate">{topic}</span>
             <span className="text-zinc-500 ml-2 shrink-0">{count} problems</span>
           </div>
-          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
             <div className="h-full rounded-full" style={{ width: `${(count / max) * 100}%`, background: '#60a5fa' }} />
           </div>
         </div>
@@ -94,7 +94,7 @@ function TopTopics({ entries }) {
 export default function DSAStats({ entries }) {
   if (!entries || entries.length === 0) {
     return (
-      <div className="rounded-xl p-8 text-center" style={{ background: '#161616', border: '1px solid #222' }}>
+      <div className="rounded-xl p-8 text-center" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
         <ClipboardList size={32} className="text-zinc-700 mx-auto mb-3" />
         <p className="text-zinc-500 text-sm">No data yet. Start adding problems!</p>
       </div>
@@ -127,16 +127,16 @@ export default function DSAStats({ entries }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Difficulty breakdown */}
-        <div className="rounded-xl p-5" style={{ background: '#161616', border: '1px solid #222' }}>
+        <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-5">Difficulty Breakdown</h3>
           <div className="flex items-center gap-6">
             {/* Radial chart */}
             <div className="shrink-0" style={{ width: 120, height: 120 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart cx="50%" cy="50%" innerRadius="40%" outerRadius="100%" data={radialData} startAngle={90} endAngle={-270}>
-                  <RadialBar dataKey="value" cornerRadius={4} background={{ fill: '#1e1e1e' }} />
+                  <RadialBar dataKey="value" cornerRadius={4} background={{ fill: 'var(--bg-elevated)' }} />
                   <Tooltip
-                    contentStyle={{ background: '#1e1e1e', border: '1px solid #2a2a2a', color: '#fff', borderRadius: '8px', fontSize: '12px' }}
+                    contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)', color: '#fff', borderRadius: '8px', fontSize: '12px' }}
                     formatter={(v, n) => [`${v}%`, n]}
                   />
                 </RadialBarChart>
@@ -152,7 +152,7 @@ export default function DSAStats({ entries }) {
         </div>
 
         {/* Top patterns */}
-        <div className="rounded-xl p-5" style={{ background: '#161616', border: '1px solid #222' }}>
+        <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-5">
             <TrendingUp size={13} className="text-yellow-400" />
             <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Top Patterns</h3>
@@ -161,7 +161,7 @@ export default function DSAStats({ entries }) {
         </div>
 
         {/* Top topics */}
-        <div className="rounded-xl p-5 lg:col-span-2" style={{ background: '#161616', border: '1px solid #222' }}>
+        <div className="rounded-xl p-5 lg:col-span-2" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-5">
             <ClipboardList size={13} className="text-blue-400" />
             <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Most Practiced Topics</h3>
@@ -178,7 +178,7 @@ export default function DSAStats({ entries }) {
                     <span className="text-zinc-200 font-medium truncate">{topic}</span>
                     <span className="text-zinc-500 ml-2 shrink-0">{count}</span>
                   </div>
-                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e1e' }}>
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
                     <div className="h-full rounded-full" style={{ width: `${(count / max) * 100}%`, background: '#60a5fa' }} />
                   </div>
                 </div>

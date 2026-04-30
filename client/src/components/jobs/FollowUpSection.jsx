@@ -12,16 +12,16 @@ const STATUS_BADGE = {
 export default function FollowUpSection({ followUps }) {
   if (!followUps || followUps.length === 0) {
     return (
-      <div className="rounded-xl p-6" style={{ background: '#161616', border: '1px solid #222' }}>
+      <div className="rounded-xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
         <h2 className="text-sm font-semibold text-white mb-3">Follow Up Today</h2>
-        <p className="text-zinc-500 text-sm flex items-center gap-1.5"><PartyPopper size={14} style={{ color: '#EAB308' }} /> No follow-ups due today.</p>
+        <p className="text-zinc-500 text-sm flex items-center gap-1.5"><PartyPopper size={14} style={{ color: 'var(--accent)' }} /> No follow-ups due today.</p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl p-6" style={{ background: '#161616', border: '1px solid #222' }}>
-      <h2 className="text-sm font-semibold text-white mb-4">Follow Up Today <span style={{ color: '#EAB308' }}>({followUps.length})</span></h2>
+    <div className="rounded-xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
+      <h2 className="text-sm font-semibold text-white mb-4">Follow Up Today <span style={{ color: 'var(--accent)' }}>({followUps.length})</span></h2>
       <div className="space-y-2">
         {followUps.map((app) => {
           const followUpDate = app.followUpDate ? dayjs(app.followUpDate) : null;

@@ -6,7 +6,7 @@ function B3Logo({ size = 40 }) {
   return (
     <div
       className="flex items-center justify-center rounded-xl font-black text-black select-none"
-      style={{ width: size, height: size, background: '#EAB308', fontSize: size * 0.42, letterSpacing: '-1px' }}
+      style={{ width: size, height: size, background: 'var(--accent)', fontSize: size * 0.42, letterSpacing: '-1px' }}
     >
       B<sup style={{ fontSize: size * 0.26, verticalAlign: 'super' }}>3</sup>
     </div>
@@ -39,13 +39,13 @@ export default function Register() {
 
   const inputProps = (onFocus, onBlur) => ({
     className: 'w-full rounded-lg px-3 py-2.5 text-sm text-white outline-none transition-all placeholder-zinc-600',
-    style: { background: '#1a1a1a', border: '1px solid #2a2a2a' },
-    onFocus: e => { e.target.style.borderColor = '#EAB308'; },
-    onBlur: e => { e.target.style.borderColor = '#2a2a2a'; },
+    style: { background: 'var(--bg-input)', border: '1px solid var(--border-input)' },
+    onFocus: e => { e.target.style.borderColor = 'var(--accent)'; },
+    onBlur: e => { e.target.style.borderColor = 'var(--border-input)'; },
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6" style={{ background: '#0d0d0d' }}>
+    <div className="min-h-screen flex items-center justify-center px-6" style={{ background: 'var(--bg)' }}>
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-8 gap-3">
           <B3Logo size={48} />
@@ -58,7 +58,7 @@ export default function Register() {
         <h2 className="text-xl font-bold text-white mb-1">Create your account</h2>
         <p className="text-sm text-zinc-500 mb-6">Start building your future today.</p>
 
-        <div className="rounded-2xl p-6 card-shadow" style={{ background: '#161616', border: '1px solid #222' }}>
+        <div className="rounded-2xl p-6 card-shadow" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           {error && (
             <div className="mb-4 px-3 py-2.5 rounded-lg text-sm" style={{ background: '#1a0808', border: '1px solid #3f1515', color: '#f87171' }}>
               {error}
@@ -81,7 +81,7 @@ export default function Register() {
             <button
               type="submit" disabled={loading}
               className="w-full font-semibold rounded-lg py-2.5 text-sm transition-all disabled:opacity-50 text-black"
-              style={{ background: '#EAB308' }}
+              style={{ background: 'var(--accent)' }}
             >
               {loading ? 'Creating account...' : 'Create account'}
             </button>

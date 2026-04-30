@@ -30,7 +30,7 @@ function EditModal({ app, onClose, onSave }) {
 
   return (
     <Modal>
-      <div className="rounded-xl p-6 w-full max-w-lg space-y-4 max-h-[90vh] overflow-y-auto" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+      <div className="rounded-xl p-6 w-full max-w-lg space-y-4 max-h-[90vh] overflow-y-auto" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
         <h3 className="text-white font-semibold text-base">Edit Application</h3>
         <div className="grid grid-cols-2 gap-3">
           {[['company', 'Company'], ['role', 'Role']].map(([field, label]) => (
@@ -38,16 +38,16 @@ function EditModal({ app, onClose, onSave }) {
               <label className="block text-xs text-zinc-500 mb-1">{label}</label>
               <input type="text" value={form[field]} onChange={(e) => set(field, e.target.value)}
                 className="w-full rounded-lg px-3 py-2 text-white text-sm outline-none transition-all"
-                style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}
-                onFocus={e => e.target.style.borderColor = '#EAB308'}
-                onBlur={e => e.target.style.borderColor = '#2a2a2a'} />
+                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}
+                onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                onBlur={e => e.target.style.borderColor = 'var(--border-input)'} />
             </div>
           ))}
           <div>
             <label className="block text-xs text-zinc-500 mb-1">Source</label>
             <select value={form.source} onChange={(e) => set('source', e.target.value)}
               className="w-full rounded-lg px-3 py-2 text-white text-sm outline-none"
-              style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>
+              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>
               {SOURCES.map((s) => <option key={s}>{s}</option>)}
             </select>
           </div>
@@ -55,7 +55,7 @@ function EditModal({ app, onClose, onSave }) {
             <label className="block text-xs text-zinc-500 mb-1">Status</label>
             <select value={form.status} onChange={(e) => set('status', e.target.value)}
               className="w-full rounded-lg px-3 py-2 text-white text-sm outline-none"
-              style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>
+              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>
               {STATUSES.map((s) => <option key={s}>{s}</option>)}
             </select>
           </div>
@@ -63,13 +63,13 @@ function EditModal({ app, onClose, onSave }) {
             <label className="block text-xs text-zinc-500 mb-1">Date Applied</label>
             <input type="date" value={form.date} onChange={(e) => set('date', e.target.value)}
               className="w-full rounded-lg px-3 py-2 text-white text-sm outline-none"
-              style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }} />
+              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }} />
           </div>
           <div>
             <label className="block text-xs text-zinc-500 mb-1">Follow-up Date</label>
             <input type="date" value={form.followUpDate} onChange={(e) => set('followUpDate', e.target.value)}
               className="w-full rounded-lg px-3 py-2 text-white text-sm outline-none"
-              style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }} />
+              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }} />
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -80,13 +80,13 @@ function EditModal({ app, onClose, onSave }) {
           <label className="block text-xs text-zinc-500 mb-1">Notes</label>
           <textarea value={form.notes} onChange={(e) => set('notes', e.target.value)} rows={2}
             className="w-full rounded-lg px-3 py-2 text-white text-sm outline-none resize-none transition-all"
-            style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}
-            onFocus={e => e.target.style.borderColor = '#EAB308'}
-            onBlur={e => e.target.style.borderColor = '#2a2a2a'} />
+            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}
+            onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+            onBlur={e => e.target.style.borderColor = 'var(--border-input)'} />
         </div>
         <div className="flex gap-3 pt-2">
-          <button onClick={() => onSave(form)} className="flex-1 text-black text-sm font-semibold py-2 rounded-lg" style={{ background: '#EAB308' }}>Save</button>
-          <button onClick={onClose} className="flex-1 text-zinc-300 text-sm py-2 rounded-lg" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
+          <button onClick={() => onSave(form)} className="flex-1 text-black text-sm font-semibold py-2 rounded-lg" style={{ background: 'var(--accent)' }}>Save</button>
+          <button onClick={onClose} className="flex-1 text-zinc-300 text-sm py-2 rounded-lg" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>Cancel</button>
         </div>
       </div>
     </Modal>
@@ -128,9 +128,9 @@ export default function JobTable() {
           <input type="text" value={filters.company} onChange={(e) => setFilter('company', e.target.value)}
             placeholder="Filter by company"
             className="rounded-lg px-3 py-2 text-white text-sm outline-none w-40 transition-all"
-            style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}
-            onFocus={e => e.target.style.borderColor = '#EAB308'}
-            onBlur={e => e.target.style.borderColor = '#2a2a2a'} />
+            style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }}
+            onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+            onBlur={e => e.target.style.borderColor = 'var(--border-input)'} />
         </div>
         {[['status','Status',STATUSES],['sortBy','Sort By',[['date','Date'],['company','Company'],['status','Status']]],['order','Order',[['desc','Desc'],['asc','Asc']]]].map(([key, label, opts]) => (
           <div key={key}>
@@ -139,7 +139,7 @@ export default function JobTable() {
               value={key === 'status' ? filters.status : sort[key]}
               onChange={(e) => key === 'status' ? setFilter('status', e.target.value) : setSort_(key, e.target.value)}
               className="rounded-lg px-3 py-2 text-white text-sm outline-none"
-              style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}>
+              style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }}>
               {key === 'status' && <option value="">All</option>}
               {opts.map((o) => Array.isArray(o) ? <option key={o[0]} value={o[0]}>{o[1]}</option> : <option key={o}>{o}</option>)}
             </select>
@@ -156,15 +156,15 @@ export default function JobTable() {
       )}
 
       {loading ? (
-        <div className="overflow-x-auto rounded-xl animate-pulse" style={{ border: '1px solid #222' }}>
+        <div className="overflow-x-auto rounded-xl animate-pulse" style={{ border: '1px solid var(--border)' }}>
           <table className="w-full text-sm text-left">
-            <thead style={{ background: '#1a1a1a' }}>
+            <thead style={{ background: 'var(--bg-input)' }}>
               <tr>{['Date','Company','Role','Source','Referral','Status','Follow-up','Actions'].map((h) => <th key={h} className="px-4 py-3 text-xs text-zinc-500 uppercase whitespace-nowrap">{h}</th>)}</tr>
             </thead>
-            <tbody style={{ background: '#161616' }}>
+            <tbody style={{ background: 'var(--bg-card)' }}>
               {Array.from({ length: 5 }).map((_, i) => (
-                <tr key={i} style={{ borderTop: '1px solid #1e1e1e' }}>
-                  {Array.from({ length: 8 }).map((__, j) => <td key={j} className="px-4 py-3"><div className="h-4 rounded w-full" style={{ background: '#1e1e1e' }} /></td>)}
+                <tr key={i} style={{ borderTop: '1px solid var(--border-sub)' }}>
+                  {Array.from({ length: 8 }).map((__, j) => <td key={j} className="px-4 py-3"><div className="h-4 rounded w-full" style={{ background: 'var(--bg-elevated)' }} /></td>)}
                 </tr>
               ))}
             </tbody>
@@ -173,15 +173,15 @@ export default function JobTable() {
       ) : applications.length === 0 ? (
         <div className="text-zinc-600 text-sm py-10 text-center">No applications found.</div>
       ) : (
-        <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid #222' }}>
+        <div className="overflow-x-auto rounded-xl" style={{ border: '1px solid var(--border)' }}>
           <table className="w-full text-sm text-left">
-            <thead style={{ background: '#1a1a1a' }}>
+            <thead style={{ background: 'var(--bg-input)' }}>
               <tr>{['Date','Company','Role','Source','Referral','Status','Follow-up','Actions'].map((h) => <th key={h} className="px-4 py-3 text-xs text-zinc-500 uppercase whitespace-nowrap">{h}</th>)}</tr>
             </thead>
-            <tbody style={{ background: '#161616' }}>
+            <tbody style={{ background: 'var(--bg-card)' }}>
               {pagedApps.map((app) => (
-                <tr key={app._id} className="transition-colors" style={{ borderTop: '1px solid #1e1e1e' }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#1a1a1a'}
+                <tr key={app._id} className="transition-colors" style={{ borderTop: '1px solid var(--border-sub)' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-input)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                   <td className="px-4 py-3 text-zinc-500 whitespace-nowrap">{dayjs(app.date).format('MMM D, YYYY')}</td>
                   <td className="px-4 py-3 text-white font-medium">{app.company}</td>
@@ -192,7 +192,7 @@ export default function JobTable() {
                   <td className="px-4 py-3 text-zinc-500 whitespace-nowrap">{app.followUpDate ? dayjs(app.followUpDate).format('MMM D') : '—'}</td>
                   <td className="px-4 py-3">
                     <div className="flex gap-1.5">
-                      <button onClick={() => setEditApp(app)} className="text-xs px-2 py-1 rounded font-medium" style={{ background: '#1e1e1e', color: '#EAB308', border: '1px solid #2a2a2a' }}>Edit</button>
+                      <button onClick={() => setEditApp(app)} className="text-xs px-2 py-1 rounded font-medium" style={{ background: 'var(--bg-elevated)', color: 'var(--accent)', border: '1px solid var(--border-input)' }}>Edit</button>
                       <button onClick={() => setDeleteId(app._id)} className="text-xs px-2 py-1 rounded font-medium" style={{ background: '#1a0808', color: '#f87171', border: '1px solid #3f1515' }}>Delete</button>
                     </div>
                   </td>
@@ -206,22 +206,22 @@ export default function JobTable() {
       {totalPages > 1 && (
         <div className="flex items-center gap-3 justify-end text-sm text-zinc-500">
           <button disabled={currentPage <= 1} onClick={() => setCurrentPage((p) => p - 1)}
-            className="px-3 py-1.5 rounded-lg text-white disabled:opacity-30" style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}>← Prev</button>
+            className="px-3 py-1.5 rounded-lg text-white disabled:opacity-30" style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }}>← Prev</button>
           <span>Page {currentPage} of {totalPages}</span>
           <button disabled={currentPage >= totalPages} onClick={() => setCurrentPage((p) => p + 1)}
-            className="px-3 py-1.5 rounded-lg text-white disabled:opacity-30" style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}>Next →</button>
+            className="px-3 py-1.5 rounded-lg text-white disabled:opacity-30" style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }}>Next →</button>
         </div>
       )}
 
       {deleteId && (
         <Modal>
-          <div className="rounded-xl p-6 w-80 space-y-4" style={{ background: '#161616', border: '1px solid #2a2a2a' }}>
+          <div className="rounded-xl p-6 w-80 space-y-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
             <p className="text-white text-sm">Delete this application?</p>
             <div className="flex gap-3">
               <button onClick={async () => { await deleteApplication(deleteId); setDeleteId(null); }}
                 className="flex-1 text-white text-sm py-2 rounded-lg" style={{ background: '#3f1515', border: '1px solid #5a1f1f' }}>Delete</button>
               <button onClick={() => setDeleteId(null)}
-                className="flex-1 text-zinc-300 text-sm py-2 rounded-lg" style={{ background: '#1e1e1e', border: '1px solid #2a2a2a' }}>Cancel</button>
+                className="flex-1 text-zinc-300 text-sm py-2 rounded-lg" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }}>Cancel</button>
             </div>
           </div>
         </Modal>
