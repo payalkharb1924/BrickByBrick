@@ -273,10 +273,11 @@ export default function Dashboard() {
     : 'there';
 
   useEffect(() => {
+    const dailyTarget = parseInt(localStorage.getItem('bbb_daily_target')) || 4;
     Promise.all([
       api.get('/dashboard/today'),
       api.get('/dashboard/progress'),
-      api.get('/dashboard/today-overview'),
+      api.get('/dashboard/today-overview', { params: { dailyTarget } }),
       api.get('/dashboard/activity'),
       api.get('/dashboard/upcoming'),
       api.get('/dashboard/focus'),

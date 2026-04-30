@@ -268,7 +268,7 @@ const getTodayOverview = async (req, res) => {
   try {
     const todayStart = dayjs().startOf('day').toDate();
     const todayEnd = dayjs().endOf('day').toDate();
-    const dailyTarget = 4; // default; could come from user settings later
+    const dailyTarget = parseInt(req.query.dailyTarget) || 4;
 
     const [todayDSA, todayJobs, followUpsDue, overdueRevisions, dueToday] = await Promise.all([
       DSAEntry.find({ user: req.user.id, date: { $gte: todayStart, $lte: todayEnd } }).select('difficulty solved'),
@@ -311,22 +311,33 @@ module.exports = { getToday, getProgress, getAlerts, getActivity, getUpcoming, g
 const getStreak = async (req, res) => {
   try {
     const entries = await DSAEntry.find(
-      { user: req.user.id },  // count any entry, not just solved
+      { user: req.user.id },
       { date: 1 }
     ).sort({ date: -1 });
 
     let dailyStreak = 0;
     if (entries.length > 0) {
-      // Normalize each entry date to YYYY-MM-DD in local-equivalent UTC
+      // Normalize dates to YYYY-MM-DD using the date's local day
+      // Use UTC date parts to avoid timezone shift issues
       const daysWithActivity = new Set(
-        entries.map(e => dayjs(e.date).format('YYYY-MM-DD'))
+        entries.map(e => {
+          const d = new Date(e.date);
+          // Format as YYYY-MM-DD using UTC to match how dayjs stores
+          return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-${String(d.getUTCDate()).padStart(2, '0')}`;
+        })
       );
 
-      // Walk back from today counting consecutive days
-      let checkDay = dayjs().startOf('day');
-      while (daysWithActivity.has(checkDay.format('YYYY-MM-DD'))) {
-        dailyStreak++;
-        checkDay = checkDay.subtract(1, 'day');
+      // Walk back from today (UTC) counting consecutive days
+      let checkDay = dayjs().utc ? dayjs().startOf('day') : dayjs().startOf('day');
+      for (let i = 0; i < 365; i++) {
+        const key = checkDay.subtract(i, 'day').format('YYYY-MM-DD');
+        if (daysWithActivity.has(key)) {
+          dailyStreak++;
+        } else {
+          // Allow today to have no entry yet (streak continues from yesterday)
+          if (i === 0) continue;
+          break;
+        }
       }
     }
 
