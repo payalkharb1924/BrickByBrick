@@ -117,7 +117,7 @@ export default function JobForm({ onSuccess }) {
       </div>
 
       <div className="flex items-center gap-3">
-        <input type="checkbox" id="referral" checked={form.referral} onChange={e => set('referral', e.target.checked)} className="accent-yellow-400 w-4 h-4" />
+        <input type="checkbox" id="referral" checked={form.referral} onChange={e => set('referral', e.target.checked)} style={{ accentColor: 'var(--accent)' }} className="w-4 h-4" />
         <label htmlFor="referral" className="text-sm text-zinc-400 cursor-pointer">Applied via referral</label>
       </div>
 

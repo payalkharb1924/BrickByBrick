@@ -39,7 +39,7 @@ export default function FollowUpSection({ followUps }) {
               </div>
               <div className="flex items-center gap-3">
                 <span className="px-2 py-0.5 rounded text-xs font-medium" style={STATUS_BADGE[app.status] || { background: '#1e1e1e', color: '#888' }}>{app.status}</span>
-                <span className="text-xs font-medium" style={{ color: isOverdue ? '#f87171' : '#EAB308' }}>
+                <span className="text-xs font-medium" style={{ color: isOverdue ? '#f87171' : 'var(--accent)' }}>
                   {isOverdue ? `${daysOverdue}d overdue` : 'Due today'}
                 </span>
               </div>

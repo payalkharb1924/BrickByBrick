@@ -53,7 +53,7 @@ function EditModal({ review, onClose }) {
         style={{ background: 'var(--bg-card)', border: '1px solid var(--border-input)' }}>
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-semibold text-white">
-            Edit Review — <span style={{ color: '#EAB308' }}>{dayjs(review.weekStartDate).format('MMM D, YYYY')}</span>
+            Edit Review — <span style={{ color: 'var(--accent)' }}>{dayjs(review.weekStartDate).format('MMM D, YYYY')}</span>
           </h3>
           <button onClick={onClose} className="text-zinc-500 hover:text-white"><X size={15} /></button>
         </div>
@@ -172,7 +172,7 @@ export default function ReviewList({ reviews, loading, error, onRetry }) {
       <div className="rounded-xl p-4 flex items-center justify-between gap-3 text-sm"
         style={{ background: '#1a0808', border: '1px solid #3f1515', color: '#f87171' }}>
         <span>{error}</span>
-        {onRetry && <button onClick={onRetry} className="text-xs px-3 py-1.5 rounded-lg shrink-0 text-black font-medium" style={{ background: '#EAB308' }}>Retry</button>}
+        {onRetry && <button onClick={onRetry} className="text-xs px-3 py-1.5 rounded-lg shrink-0 text-black font-medium" style={{ background: 'var(--accent)' }}>Retry</button>}
       </div>
     );
   }
@@ -201,7 +201,7 @@ export default function ReviewList({ reviews, loading, error, onRetry }) {
               </h3>
               <div className="flex items-center gap-1">
                 <button onClick={() => setEditReview(r)}
-                  className="p-1.5 rounded-lg text-zinc-500 hover:text-yellow-400 hover:bg-white/5 transition-colors">
+                  className="p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-white/5 transition-colors" style={{ color: 'var(--accent)' }}>
                   <Pencil size={13} />
                 </button>
                 <button onClick={() => setDeleteReview(r)}

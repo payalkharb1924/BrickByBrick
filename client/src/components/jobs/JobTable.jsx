@@ -73,7 +73,7 @@ function EditModal({ app, onClose, onSave }) {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <input type="checkbox" id="edit-referral" checked={form.referral} onChange={(e) => set('referral', e.target.checked)} className="accent-yellow-400 w-4 h-4" />
+          <input type="checkbox" id="edit-referral" checked={form.referral} onChange={(e) => set('referral', e.target.checked)} style={{ accentColor: 'var(--accent)' }} className="w-4 h-4" />
           <label htmlFor="edit-referral" className="text-sm text-zinc-400 cursor-pointer">Applied via referral</label>
         </div>
         <div>
@@ -151,7 +151,7 @@ export default function JobTable() {
         <div className="rounded-xl p-4 flex items-center justify-between gap-3 text-sm" style={{ background: '#1a0808', border: '1px solid #3f1515', color: '#f87171' }}>
           <span>{error}</span>
           <button onClick={() => fetchApplications({ sortBy: 'date', order: 'desc' })}
-            className="text-xs px-3 py-1.5 rounded-lg shrink-0 text-black font-medium" style={{ background: '#EAB308' }}>Retry</button>
+            className="text-xs px-3 py-1.5 rounded-lg shrink-0 text-black font-medium" style={{ background: 'var(--accent)' }}>Retry</button>
         </div>
       )}
 

@@ -3,7 +3,7 @@ import { PartyPopper } from 'lucide-react';
 
 const DIFFICULTY_BADGE = {
   Easy:   { background: '#0f2a0f', color: '#4ade80', border: '1px solid #1a4a1a' },
-  Medium: { background: '#1a1500', color: '#EAB308', border: '1px solid #3f3000' },
+  Medium: { background: 'var(--bg-input)', color: 'var(--accent)', border: '1px solid var(--border-input)' },
   Hard:   { background: '#1a0808', color: '#f87171', border: '1px solid #3f1515' },
 };
 
@@ -45,7 +45,7 @@ export default function RevisionSection({ revisions }) {
               </div>
               <div className="flex items-center gap-3">
                 <span className="px-2 py-0.5 rounded text-xs font-medium" style={DIFFICULTY_BADGE[entry.difficulty] || { background: '#1e1e1e', color: '#888' }}>{entry.difficulty}</span>
-                {info && <span className="text-xs font-medium" style={{ color: isToday ? '#EAB308' : '#f87171' }}>{info.label}</span>}
+                {info && <span className="text-xs font-medium" style={{ color: isToday ? 'var(--accent)' : '#f87171' }}>{info.label}</span>}
               </div>
             </div>
           );

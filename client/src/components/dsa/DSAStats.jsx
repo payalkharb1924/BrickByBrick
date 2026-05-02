@@ -3,14 +3,14 @@ import { Timer, CheckCircle, ClipboardList, TrendingUp } from 'lucide-react';
 
 const DIFF = {
   Easy:   { color: '#4ade80', bg: '#0f2a0f' },
-  Medium: { color: '#EAB308', bg: '#1a1500' },
+  Medium: { color: 'var(--accent)', bg: 'var(--bg-input)' },
   Hard:   { color: '#f87171', bg: '#1a0808' },
 };
 
 function MiniStatCard({ label, value, sub }) {
   return (
     <div className="rounded-xl p-4 flex flex-col gap-1" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-      <div className="text-2xl font-bold text-yellow-400">{value}</div>
+      <div className="text-2xl font-bold" style={{ color: 'var(--accent)' }}>{value}</div>
       <div className="text-xs font-medium text-white">{label}</div>
       {sub && <div className="text-xs text-zinc-600">{sub}</div>}
     </div>
@@ -55,10 +55,10 @@ function TopPatterns({ entries }) {
               <span className="text-zinc-600 w-4">#{i + 1}</span>
               <span className="text-zinc-200 font-medium">{pattern}</span>
             </div>
-            <span className="font-semibold text-yellow-400">{count}x</span>
+            <span className="font-semibold" style={{ color: 'var(--accent)' }}>{count}x</span>
           </div>
           <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-            <div className="h-full rounded-full" style={{ width: `${(count / max) * 100}%`, background: '#EAB308' }} />
+            <div className="h-full rounded-full" style={{ width: `${(count / max) * 100}%`, background: 'var(--accent)' }} />
           </div>
         </div>
       ))}
@@ -111,7 +111,7 @@ export default function DSAStats({ entries }) {
   // Radial chart data
   const radialData = [
     { name: 'Hard',   value: entries.length > 0 ? Math.round((diffCounts.Hard / entries.length) * 100) : 0,   fill: '#f87171' },
-    { name: 'Medium', value: entries.length > 0 ? Math.round((diffCounts.Medium / entries.length) * 100) : 0, fill: '#EAB308' },
+    { name: 'Medium', value: entries.length > 0 ? Math.round((diffCounts.Medium / entries.length) * 100) : 0, fill: 'var(--accent)' },
     { name: 'Easy',   value: entries.length > 0 ? Math.round((diffCounts.Easy / entries.length) * 100) : 0,   fill: '#4ade80' },
   ];
 
@@ -154,7 +154,7 @@ export default function DSAStats({ entries }) {
         {/* Top patterns */}
         <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-5">
-            <TrendingUp size={13} className="text-yellow-400" />
+            <TrendingUp size={13} style={{ color: 'var(--accent)' }} />
             <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Top Patterns</h3>
           </div>
           <TopPatterns entries={entries} />

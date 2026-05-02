@@ -7,7 +7,7 @@ import Modal from '../Modal';
 
 const DIFFICULTY_BADGE = {
   Easy:   { background: '#0f2a0f', color: '#4ade80' },
-  Medium: { background: '#1a1500', color: '#EAB308' },
+  Medium: { background: 'var(--bg-input)', color: 'var(--accent)' },
   Hard:   { background: '#1a0808', color: '#f87171' },
 };
 
@@ -15,7 +15,7 @@ function statusBadge(entry) {
   if (!entry.solved) return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium" style={{ background: '#1a0808', color: '#f87171' }}><XCircle size={11} /> Unsolved</span>;
   const today = dayjs().startOf('day');
   const hasOverdue = entry.revisionDates?.some((d) => dayjs(d).isBefore(today) || dayjs(d).isSame(today, 'day'));
-  if (hasOverdue) return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium" style={{ background: '#1a1500', color: '#EAB308' }}><Clock size={11} /> Revision Due</span>;
+  if (hasOverdue) return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--bg-input)', color: 'var(--accent)' }}><Clock size={11} /> Revision Due</span>;
   return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium" style={{ background: '#0f2a0f', color: '#4ade80' }}><CheckCircle2 size={11} /> Done</span>;
 }
 
@@ -65,7 +65,7 @@ function EditModal({ entry, onClose, onSave }) {
           <div className="flex gap-4">
             {[true, false].map((val) => (
               <label key={String(val)} className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="edit-solved" checked={form.solved === val} onChange={() => set('solved', val)} className="accent-yellow-400" />
+                <input type="radio" name="edit-solved" checked={form.solved === val} onChange={() => set('solved', val)} style={{ accentColor: 'var(--accent)' }} />
                 <span className="text-sm" style={{ color: val ? '#4ade80' : '#f87171' }}>{val ? 'Solved' : 'Unsolved'}</span>
               </label>
             ))}
@@ -168,7 +168,7 @@ export default function DSATable() {
         <div className="rounded-xl p-4 flex items-center justify-between gap-3 text-sm" style={{ background: '#1a0808', border: '1px solid #3f1515', color: '#f87171' }}>
           <span>{error}</span>
           <button onClick={() => fetchEntries({ sortBy: 'date', order: 'desc' })}
-            className="text-xs px-3 py-1.5 rounded-lg transition-colors shrink-0 text-black font-medium" style={{ background: '#EAB308' }}>Retry</button>
+            className="text-xs px-3 py-1.5 rounded-lg transition-colors shrink-0 text-black font-medium" style={{ background: 'var(--accent)' }}>Retry</button>
         </div>
       )}
 
@@ -210,7 +210,7 @@ export default function DSATable() {
                   <td className="px-4 py-3">
                     <div className="flex gap-1.5">
                       <button onClick={() => setEditEntry(entry)} className="text-xs px-2 py-1 rounded font-medium transition-colors" style={{ background: 'var(--bg-elevated)', color: 'var(--accent)', border: '1px solid var(--border-input)' }}>Edit</button>
-                      <button onClick={() => setMistakePrefill({ problemName: entry.problemName, dsaEntryId: entry._id })} className="text-xs px-2 py-1 rounded font-medium transition-colors" style={{ background: '#1a1500', color: '#EAB308', border: '1px solid #3f3000' }}>+ Mistake</button>
+                      <button onClick={() => setMistakePrefill({ problemName: entry.problemName, dsaEntryId: entry._id })} className="text-xs px-2 py-1 rounded font-medium transition-colors" style={{ background: 'var(--bg-input)', color: 'var(--accent)', border: '1px solid var(--border-input)' }}>+ Mistake</button>
                       <button onClick={() => setDeleteId(entry._id)} className="text-xs px-2 py-1 rounded font-medium transition-colors" style={{ background: '#1a0808', color: '#f87171', border: '1px solid #3f1515' }}>Delete</button>
                     </div>
                   </td>

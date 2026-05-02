@@ -28,7 +28,7 @@ export default function Resources() {
     <div className="p-5 space-y-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <BookOpen size={18} className="text-yellow-400" />
+          <BookOpen size={18} style={{ color: 'var(--accent)' }} />
           <h1 className="text-xl font-bold text-white">Resources</h1>
         </div>
         <button onClick={() => setShowForm(v => !v)}
@@ -95,7 +95,7 @@ export default function Resources() {
                   <span className="text-xs px-1.5 py-0.5 rounded mt-1 inline-block" style={{ background: 'var(--bg-elevated)', color: 'var(--accent)' }}>{r.category}</span>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
-                  <button onClick={() => toggleStar(r)} className={`transition-colors ${r.starred ? 'text-yellow-400' : 'text-zinc-600 hover:text-yellow-400'}`}>
+                  <button onClick={() => toggleStar(r)} className={`transition-colors ${r.starred ? 'text-white' : 'text-zinc-600 hover:text-white'}`} style={r.starred ? { color: 'var(--accent)' } : {}}>
                     <Star size={13} fill={r.starred ? 'currentColor' : 'none'} />
                   </button>
                   <button onClick={() => remove(r._id)} className="text-zinc-600 hover:text-red-400 transition-colors">
@@ -106,7 +106,7 @@ export default function Resources() {
               {r.notes && <p className="text-xs text-zinc-500">{r.notes}</p>}
               {r.url && (
                 <a href={r.url} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-xs text-yellow-400 hover:text-yellow-300 transition-colors mt-auto">
+                  className="flex items-center gap-1 text-xs transition-colors mt-auto" style={{ color: 'var(--accent)' }}>
                   Open link <ExternalLink size={11} />
                 </a>
               )}

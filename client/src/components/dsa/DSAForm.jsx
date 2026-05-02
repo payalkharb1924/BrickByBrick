@@ -113,7 +113,7 @@ export default function DSAForm({ onSuccess }) {
         <div className="flex gap-5">
           {[true, false].map(val => (
             <label key={String(val)} className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="solved" checked={form.solved === val} onChange={() => set('solved', val)} className="accent-yellow-400" />
+              <input type="radio" name="solved" checked={form.solved === val} onChange={() => set('solved', val)} style={{ accentColor: 'var(--accent)' }} />
               <span className="text-sm font-medium" style={{ color: val ? '#4ade80' : '#f87171' }}>{val ? 'Solved' : 'Unsolved'}</span>
             </label>
           ))}
@@ -127,7 +127,7 @@ export default function DSAForm({ onSuccess }) {
           className="w-full rounded-lg px-3 py-2 text-white text-sm outline-none resize-none transition-all"
           style={inputStyle} onFocus={focusIn} onBlur={focusOut} />
         {mistakeWarning && (
-          <div className="mt-2 rounded-lg px-3 py-2.5 text-sm" style={{ background: '#1a1500', border: '1px solid #3f3000', color: '#EAB308' }}>
+          <div className="mt-2 rounded-lg px-3 py-2.5 text-sm" style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)', color: 'var(--accent)' }}>
             Writing your mistake helps you improve. Are you sure you want to skip?
             <div className="flex gap-3 mt-2">
               <button type="submit" className="text-xs px-3 py-1 rounded-lg font-medium text-black" style={{ background: 'var(--accent)' }}>Yes, skip</button>

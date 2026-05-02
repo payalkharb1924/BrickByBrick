@@ -50,7 +50,7 @@ export default function Register() {
         <div className="flex flex-col items-center mb-8 gap-3">
           <B3Logo size={48} />
           <div className="text-center">
-            <div className="text-xl font-black text-yellow-400">BrickByBrick</div>
+            <div className="text-xl font-black" style={{ color: 'var(--accent)' }}>BrickByBrick</div>
             <div className="text-xs text-zinc-500 mt-0.5">NO SHORTCUTS. JUST SYSTEMS.</div>
           </div>
         </div>
@@ -89,7 +89,7 @@ export default function Register() {
 
           <p className="mt-5 text-center text-sm text-zinc-500">
             Already have an account?{' '}
-            <Link to="/login" className="font-medium text-yellow-400 hover:text-yellow-300">Sign in</Link>
+            <Link to="/login" className="font-medium transition-colors" style={{ color: 'var(--accent)' }} onMouseEnter={e => e.target.style.opacity = '0.8'} onMouseLeave={e => e.target.style.opacity = '1'}>Sign in</Link>
           </p>
         </div>
       </div>

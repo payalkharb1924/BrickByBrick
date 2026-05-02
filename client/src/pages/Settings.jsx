@@ -11,7 +11,7 @@ function Card({ icon: Icon, title, children }) {
   return (
     <div className="rounded-xl p-5 space-y-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
-        <Icon size={14} className="text-yellow-400" />
+        <Icon size={14} style={{ color: 'var(--accent)' }} />
         <h3 className="text-sm font-semibold text-white">{title}</h3>
       </div>
       {children}
@@ -150,7 +150,7 @@ export default function Settings() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <SettingsIcon size={18} className="text-yellow-400" />
+          <SettingsIcon size={18} style={{ color: 'var(--accent)' }} />
           <h1 className="text-xl font-bold text-white">Settings</h1>
         </div>
         <button onClick={saveSettings}
@@ -175,7 +175,7 @@ export default function Settings() {
               <div>
                 <div className="text-sm font-semibold text-white">{displayName}</div>
                 <div className="text-xs text-zinc-500 mt-0.5">{user?.email}</div>
-                <div className="text-xs text-yellow-400 mt-0.5">BrickByBrick Member</div>
+                <div className="text-xs mt-0.5" style={{ color: 'var(--accent)' }}>BrickByBrick Member</div>
               </div>
             </div>
           </Card>
@@ -183,7 +183,7 @@ export default function Settings() {
           {/* Preferences — flex-1 so it stretches to fill remaining height */}
           <div className="flex-1 rounded-xl p-5 space-y-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
             <div className="flex items-center gap-2 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
-              <Palette size={14} className="text-yellow-400" />
+              <Palette size={14} style={{ color: 'var(--accent)' }} />
               <h3 className="text-sm font-semibold text-white">Preferences</h3>
             </div>
             <div>
@@ -211,7 +211,7 @@ export default function Settings() {
                 <span className="text-xs text-zinc-500">problems / day</span>
               </div>
               <p className="text-xs text-zinc-600 mt-1">
-                Controls the daily progress ring on your dashboard. Currently set to <span className="text-yellow-400">{dailyTarget}</span>.
+                Controls the daily progress ring on your dashboard. Currently set to <span style={{ color: 'var(--accent)' }}>{dailyTarget}</span>.
               </p>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function Settings() {
               <div className="rounded-lg px-3 py-2.5 text-xs font-medium" style={{
                 background: notifMsg.type === 'success' ? '#081a0a' : notifMsg.type === 'error' ? '#1a0808' : '#1a1500',
                 border: `1px solid ${notifMsg.type === 'success' ? '#153f18' : notifMsg.type === 'error' ? '#3f1515' : '#3f3000'}`,
-                color: notifMsg.type === 'success' ? '#4ade80' : notifMsg.type === 'error' ? '#f87171' : '#EAB308',
+                color: notifMsg.type === 'success' ? '#4ade80' : notifMsg.type === 'error' ? '#f87171' : 'var(--accent)',
               }}>
                 {notifMsg.text}
               </div>
@@ -238,7 +238,7 @@ export default function Settings() {
             <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--bg-input)' }}>
               <div>
                 <div className="text-sm text-white flex items-center gap-2">
-                  {notifPerm === 'granted' ? <Bell size={13} className="text-yellow-400" /> : <BellOff size={13} className="text-zinc-500" />}
+                  {notifPerm === 'granted' ? <Bell size={13} style={{ color: 'var(--accent)' }} /> : <BellOff size={13} className="text-zinc-500" />}
                   Browser Notifications
                 </div>
                 <div className="text-xs text-zinc-500 mt-0.5">

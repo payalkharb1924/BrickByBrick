@@ -18,7 +18,7 @@ function getGreeting() {
   return 'Good evening';
 }
 
-function Sparkline({ color = '#EAB308' }) {
+function Sparkline({ color = 'var(--accent)' }) {
   const pts = [10, 6, 8, 4, 7, 3, 5, 2, 4, 1].map((y, x) => `${x * 11},${y * 3}`).join(' ');
   return (
     <svg width="90" height="32" viewBox="0 0 99 30" fill="none">
@@ -27,7 +27,7 @@ function Sparkline({ color = '#EAB308' }) {
   );
 }
 
-function Ring({ value, max, sublabel, color = '#EAB308', size = 90 }) {
+function Ring({ value, max, sublabel, color = 'var(--accent)', size = 90 }) {
   const r = 36;
   const circ = 2 * Math.PI * r;
   const pct = max > 0 ? Math.min(value / max, 1) : 0;
@@ -35,7 +35,7 @@ function Ring({ value, max, sublabel, color = '#EAB308', size = 90 }) {
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} viewBox="0 0 80 80">
-        <circle cx="40" cy="40" r={r} fill="none" stroke="#2a2a2a" strokeWidth="7" />
+        <circle cx="40" cy="40" r={r} fill="none" stroke="var(--border-input)" strokeWidth="7" />
         <circle cx="40" cy="40" r={r} fill="none" stroke={color} strokeWidth="7"
           strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
           transform="rotate(-90 40 40)" />
@@ -53,7 +53,7 @@ function StatBigCard({ title, value, delta, deltaLabel, icon: Icon, linkTo, link
     <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-start justify-between">
         <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
-          {Icon && <Icon size={17} className="text-yellow-400" />}
+          {Icon && <Icon size={17} style={{ color: 'var(--accent)' }} />}
         </div>
         <Sparkline />
       </div>
@@ -68,7 +68,7 @@ function StatBigCard({ title, value, delta, deltaLabel, icon: Icon, linkTo, link
           </span>
         )}
         {linkTo && (
-          <Link to={linkTo} className="text-xs text-yellow-400 flex items-center gap-0.5 hover:text-yellow-300 ml-auto">
+          <Link to={linkTo} className="text-xs flex items-center gap-0.5 transition-opacity hover:opacity-80 ml-auto" style={{ color: 'var(--accent)' }}>
             {linkLabel} <ArrowRight size={11} />
           </Link>
         )}
@@ -88,10 +88,10 @@ function TodayOverview({ overview }) {
         <div className="flex flex-col gap-3">
           <div className="text-xs font-medium text-zinc-400">DSA Progress</div>
           <div className="flex justify-center">
-            <Ring value={dsa.solved} max={dsa.target} sublabel="Daily Target" color="#EAB308" />
+            <Ring value={dsa.solved} max={dsa.target} sublabel="Daily Target" color="var(--accent)" />
           </div>
           <div className="space-y-1.5">
-            {[['Easy', dsa.breakdown.Easy, '#4ade80'], ['Medium', dsa.breakdown.Medium, '#EAB308'], ['Hard', dsa.breakdown.Hard, '#f87171']].map(([d, v, c]) => (
+            {[['Easy', dsa.breakdown.Easy, '#4ade80'], ['Medium', dsa.breakdown.Medium, 'var(--accent)'], ['Hard', dsa.breakdown.Hard, '#f87171']].map(([d, v, c]) => (
               <div key={d} className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full" style={{ background: c }} />
@@ -126,10 +126,10 @@ function TodayOverview({ overview }) {
         <div className="flex flex-col gap-3">
           <div className="text-xs font-medium text-zinc-400">Revisions Due</div>
           <div className="flex justify-center">
-            <Ring value={revisions.dueToday + revisions.overdue} max={Math.max(revisions.dueToday + revisions.overdue, 10)} sublabel="Total" color="#f87171" />
+            <Ring value={revisions.dueToday + revisions.overdue} max={Math.max(revisions.dueToday + revisions.overdue, 10)} sublabel="Total" color="var(--accent)" />
           </div>
           <div className="space-y-1.5">
-            {[['Due Today', revisions.dueToday, '#EAB308'], ['Overdue', revisions.overdue, '#f87171']].map(([l, v, c]) => (
+            {[['Due Today', revisions.dueToday, 'var(--accent)'], ['Overdue', revisions.overdue, '#f87171']].map(([l, v, c]) => (
               <div key={l} className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full" style={{ background: c }} />
@@ -146,7 +146,7 @@ function TodayOverview({ overview }) {
 }
 
 const ACTIVITY_ICONS = {
-  dsa:      { Icon: Code2,        color: '#EAB308' },
+  dsa:      { Icon: Code2,        color: 'var(--accent)' },
   job:      { Icon: Briefcase,    color: '#60a5fa' },
   revision: { Icon: RefreshCw,    color: '#4ade80' },
   referral: { Icon: Users,        color: '#c084fc' },
@@ -185,7 +185,7 @@ function RecentActivity({ activities }) {
 }
 
 const UPCOMING_ICONS = {
-  revision: { Icon: RefreshCw,    color: '#EAB308' },
+  revision: { Icon: RefreshCw,    color: 'var(--accent)' },
   followup: { Icon: Mail,         color: '#fb923c' },
   review:   { Icon: ClipboardList, color: '#60a5fa' },
 };
@@ -204,7 +204,7 @@ function UpcomingPanel({ items }) {
     <div className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-white">Upcoming</h3>
-        <Link to="/revisions" className="text-xs text-yellow-400 hover:text-yellow-300 flex items-center gap-0.5">
+        <Link to="/revisions" className="text-xs transition-opacity hover:opacity-80 flex items-center gap-0.5" style={{ color: 'var(--accent)' }}>
           View all <ChevronRight size={11} />
         </Link>
       </div>
@@ -238,7 +238,7 @@ function FocusPanel({ focus }) {
       <div className="space-y-3">
         <div>
           <div className="text-xs text-zinc-500 mb-1">Weak Topic</div>
-          <div className="text-sm font-semibold text-yellow-400">
+          <div className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>
             {focus?.weakTopic || <span className="text-zinc-600 font-normal">No data yet</span>}
           </div>
         </div>
@@ -250,7 +250,7 @@ function FocusPanel({ focus }) {
         </div>
         <div className="flex justify-end">
           <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
-            <Target size={16} className="text-yellow-400" />
+            <Target size={16} style={{ color: 'var(--accent)' }} />
           </div>
         </div>
       </div>
@@ -298,14 +298,14 @@ export default function Dashboard() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-xl font-bold text-white flex items-center gap-2">
-              {getGreeting()}, {displayName}! <Sparkles size={18} className="text-yellow-400" />
+              {getGreeting()}, {displayName}! <Sparkles size={18} style={{ color: 'var(--accent)' }} />
             </h1>
             <p className="text-xs text-zinc-500 mt-0.5">Keep building, one brick at a time.</p>
           </div>
           <div className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-xl shrink-0" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
-            <TrendingUp size={15} className="text-yellow-400 shrink-0" />
-            <span className="text-xs text-yellow-400 font-medium italic">"Discipline today, offers tomorrow."</span>
-            <TrendingUp size={15} className="text-yellow-400 shrink-0" />
+            <TrendingUp size={15} style={{ color: 'var(--accent)' }} className="shrink-0" />
+            <span className="text-xs font-medium italic" style={{ color: 'var(--accent)' }}>"Discipline today, offers tomorrow."</span>
+            <TrendingUp size={15} style={{ color: 'var(--accent)' }} className="shrink-0" />
           </div>
         </div>
 

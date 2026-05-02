@@ -50,7 +50,7 @@ export default function Jobs() {
       )}
 
       {repeatedCompanies.length > 0 && (
-        <div className="rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2" style={{ background: '#1a1500', border: '1px solid #3f3000', color: '#EAB308' }}>
+        <div className="rounded-xl px-4 py-3 text-sm font-medium flex items-center gap-2" style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)', color: 'var(--accent)' }}>
           <AlertTriangle size={15} className="shrink-0" />
           You've applied to <strong className="mx-1">{repeatedCompanies.join(', ')}</strong> multiple times without a referral.
         </div>
@@ -59,10 +59,11 @@ export default function Jobs() {
       <div className="flex gap-1 border-b" style={{ borderColor: 'var(--border-sub)' }}>
         {TABS.map((tab) => (
           <button key={tab} onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${activeTab === tab ? 'border-yellow-400 text-yellow-400' : 'border-transparent text-zinc-500 hover:text-white'}`}>
+            className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${activeTab === tab ? 'border-b-2 text-white' : 'border-transparent text-zinc-500 hover:text-white'}`}
+            style={activeTab === tab ? { borderColor: 'var(--accent)', color: 'var(--accent)' } : {}}>
             {tab}
             {tab === 'Follow Ups' && followUps.length > 0 && (
-              <span className="ml-1.5 bg-yellow-600 text-white text-xs rounded-full px-1.5 py-0.5">{followUps.length}</span>
+              <span className="ml-1.5 text-white text-xs rounded-full px-1.5 py-0.5" style={{ background: 'var(--accent)' }}>{followUps.length}</span>
             )}
           </button>
         ))}

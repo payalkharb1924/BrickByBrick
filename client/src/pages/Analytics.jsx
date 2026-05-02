@@ -5,14 +5,14 @@ import useJobStore from '../store/jobStore';
 
 // ── shared primitives ─────────────────────────────────────────────────────────
 
-function StatCard({ label, value, sub, accent = '#EAB308', icon: Icon }) {
+function StatCard({ label, value, sub, accent = 'var(--accent)', icon: Icon }) {
   return (
     <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
-        <Icon size={15} style={{ color: accent }} />
+        <Icon size={15} style={{ color: accent === 'var(--accent)' ? 'var(--accent)' : accent }} />
       </div>
       <div>
-        <div className="text-2xl font-bold" style={{ color: accent }}>{value}</div>
+        <div className="text-2xl font-bold" style={{ color: accent === 'var(--accent)' ? 'var(--accent)' : accent }}>{value}</div>
         <div className="text-xs font-medium text-white mt-0.5">{label}</div>
         {sub && <div className="text-xs text-zinc-600 mt-0.5">{sub}</div>}
       </div>
@@ -41,11 +41,11 @@ function HBar({ label, value, max, color, right }) {
   );
 }
 
-function Section({ title, icon: Icon, iconColor = '#EAB308', children }) {
+function Section({ title, icon: Icon, iconColor = 'var(--accent)', children }) {
   return (
     <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="flex items-center gap-2 mb-5">
-        <Icon size={13} style={{ color: iconColor }} />
+        <Icon size={13} style={{ color: iconColor === 'var(--accent)' ? 'var(--accent)' : iconColor }} />
         <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{title}</h3>
       </div>
       {children}
@@ -55,7 +55,7 @@ function Section({ title, icon: Icon, iconColor = '#EAB308', children }) {
 
 // ── DSA section ───────────────────────────────────────────────────────────────
 
-const DIFF_COLORS = { Easy: '#4ade80', Medium: '#EAB308', Hard: '#f87171' };
+const DIFF_COLORS = { Easy: '#4ade80', Medium: 'var(--accent)', Hard: '#f87171' };
 
 function DSASection({ entries }) {
   if (!entries.length) {
@@ -89,7 +89,7 @@ function DSASection({ entries }) {
     <>
       {/* DSA stat cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <StatCard label="Problems Solved"  value={solved}                    sub={`of ${entries.length} logged`} icon={CheckCircle}  accent="#EAB308" />
+        <StatCard label="Problems Solved"  value={solved}                    sub={`of ${entries.length} logged`} icon={CheckCircle}  accent="var(--accent)" />
         <StatCard label="Solve Rate"       value={`${solveRate}%`}           sub="overall"                       icon={TrendingUp}   accent="#4ade80" />
         <StatCard label="Avg Time"         value={avgTime ? `${avgTime}m` : '—'} sub="per problem"              icon={Timer}        accent="#60a5fa" />
         <StatCard label="Total Logged"     value={entries.length}            sub="all time"                      icon={ClipboardList} accent="#c084fc" />
@@ -97,7 +97,7 @@ function DSASection({ entries }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Difficulty */}
-        <Section title="Difficulty Breakdown" icon={Code2} iconColor="#EAB308">
+        <Section title="Difficulty Breakdown" icon={Code2} iconColor="var(--accent)">
           <div className="space-y-4">
             {Object.entries(diffCounts).map(([d, v]) => (
               <HBar key={d} label={d} value={v} max={entries.length} color={DIFF_COLORS[d]} right={`${v} problems`} />
@@ -106,7 +106,7 @@ function DSASection({ entries }) {
         </Section>
 
         {/* Top patterns */}
-        <Section title="Top Patterns" icon={TrendingUp} iconColor="#EAB308">
+        <Section title="Top Patterns" icon={TrendingUp} iconColor="var(--accent)">
           {patterns.length === 0 ? (
             <p className="text-zinc-600 text-sm">No patterns logged yet.</p>
           ) : (
@@ -118,10 +118,10 @@ function DSASection({ entries }) {
                       <span className="text-zinc-600 w-4">#{i + 1}</span>
                       <span className="text-zinc-200 font-medium">{p}</span>
                     </div>
-                    <span className="font-semibold text-yellow-400">{c}x</span>
+                    <span className="font-semibold" style={{ color: 'var(--accent)' }}>{c}x</span>
                   </div>
                   <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-elevated)' }}>
-                    <div className="h-full rounded-full" style={{ width: `${(c / maxPattern) * 100}%`, background: '#EAB308' }} />
+                    <div className="h-full rounded-full" style={{ width: `${(c / maxPattern) * 100}%`, background: 'var(--accent)' }} />
                   </div>
                 </div>
               ))}
@@ -185,7 +185,7 @@ function DSASection({ entries }) {
 // ── Jobs section ──────────────────────────────────────────────────────────────
 
 const STATUS_COLORS = {
-  Applied:               '#EAB308',
+  Applied:               'var(--accent)',
   'Referral Asked':      '#c084fc',
   'Interview Scheduled': '#4ade80',
   Rejected:              '#f87171',
@@ -220,7 +220,7 @@ function JobsSection({ applications }) {
     <>
       {/* Job stat cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <StatCard label="Total Applied"  value={total}              sub="all time"                    icon={Send}          accent="#EAB308" />
+        <StatCard label="Total Applied"  value={total}              sub="all time"                    icon={Send}          accent="var(--accent)" />
         <StatCard label="With Referral"  value={referrals}          sub={`${referralRate}% of total`} icon={Users}         accent="#c084fc" />
         <StatCard label="Response Rate"  value={`${responseRate}%`} sub={`${responded} responded`}   icon={MessageSquare} accent="#4ade80" />
         <StatCard label="Interviews"     value={interviews}         sub="scheduled"                   icon={CalendarCheck} accent="#60a5fa" />
@@ -228,7 +228,7 @@ function JobsSection({ applications }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Status breakdown */}
-        <Section title="Application Status" icon={Briefcase} iconColor="#EAB308">
+        <Section title="Application Status" icon={Briefcase} iconColor="var(--accent)">
           <div className="space-y-4">
             {Object.entries(statusCounts).sort((a, b) => b[1] - a[1]).map(([name, value]) => (
               <HBar key={name} label={name} value={value} max={total} color={STATUS_COLORS[name] || '#555'} right={`${value} apps`} />
@@ -257,7 +257,7 @@ function JobsSection({ applications }) {
         <Section title="Conversion Funnel" icon={TrendingUp} iconColor="#4ade80">
           <div className="flex items-end gap-3 h-32">
             {[
-              { label: 'Applied',    value: total,      color: '#EAB308' },
+              { label: 'Applied',    value: total,      color: 'var(--accent)' },
               { label: 'Responded',  value: responded,  color: '#60a5fa' },
               { label: 'Interviews', value: interviews, color: '#4ade80' },
               { label: 'Referrals',  value: referrals,  color: '#c084fc' },
@@ -311,14 +311,14 @@ export default function Analytics() {
   return (
     <div className="p-5 space-y-6">
       <div className="flex items-center gap-2">
-        <BarChart2 size={18} className="text-yellow-400" />
+        <BarChart2 size={18} style={{ color: 'var(--accent)' }} />
         <h1 className="text-xl font-bold text-white">Analytics</h1>
       </div>
 
       {/* DSA section */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Code2 size={14} className="text-yellow-400" />
+          <Code2 size={14} style={{ color: 'var(--accent)' }} />
           <h2 className="text-sm font-semibold text-white">DSA Performance</h2>
         </div>
         <DSASection entries={entries} />
@@ -329,7 +329,7 @@ export default function Analytics() {
       {/* Jobs section */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Briefcase size={14} className="text-yellow-400" />
+          <Briefcase size={14} style={{ color: 'var(--accent)' }} />
           <h2 className="text-sm font-semibold text-white">Job Applications</h2>
         </div>
         <JobsSection applications={applications} />

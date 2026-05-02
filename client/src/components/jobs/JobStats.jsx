@@ -1,21 +1,21 @@
 import { Send, Users, MessageSquare, CalendarCheck, TrendingUp, XCircle } from 'lucide-react';
 
 const STATUS_CONFIG = {
-  Applied:               { color: '#EAB308', bg: '#1a1500' },
+  Applied:               { color: 'var(--accent)', bg: 'var(--bg-input)' },
   'Referral Asked':      { color: '#c084fc', bg: '#150a20' },
   'Interview Scheduled': { color: '#4ade80', bg: '#0a1a0a' },
   Rejected:              { color: '#f87171', bg: '#1a0808' },
   'No Response':         { color: '#555',    bg: '#1a1a1a' },
 };
 
-function MiniStatCard({ label, value, sub, icon: Icon, accent = '#EAB308' }) {
+function MiniStatCard({ label, value, sub, icon: Icon, accent = 'var(--accent)' }) {
   return (
     <div className="rounded-xl p-4 flex flex-col gap-3" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
       <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
-        <Icon size={15} style={{ color: accent }} />
+        <Icon size={15} style={{ color: accent === 'var(--accent)' ? 'var(--accent)' : accent }} />
       </div>
       <div>
-        <div className="text-2xl font-bold" style={{ color: accent }}>{value}</div>
+        <div className="text-2xl font-bold" style={{ color: accent === 'var(--accent)' ? 'var(--accent)' : accent }}>{value}</div>
         <div className="text-xs font-medium text-white mt-0.5">{label}</div>
         {sub && <div className="text-xs text-zinc-600 mt-0.5">{sub}</div>}
       </div>
@@ -93,7 +93,7 @@ export default function JobStats({ applications }) {
     <div className="space-y-4">
       {/* Top stat cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <MiniStatCard label="Total Applied"  value={total}              sub="all time"           icon={Send}          accent="#EAB308" />
+        <MiniStatCard label="Total Applied"  value={total}              sub="all time"           icon={Send}          accent="var(--accent)" />
         <MiniStatCard label="With Referral"  value={referralCount}      sub={`${referralRate}% of total`} icon={Users} accent="#c084fc" />
         <MiniStatCard label="Response Rate"  value={`${responseRate}%`} sub={`${responded} responded`}   icon={MessageSquare} accent="#4ade80" />
         <MiniStatCard label="Interviews"     value={interviews}         sub={`${rejected} rejected`}      icon={CalendarCheck} accent="#60a5fa" />
@@ -103,7 +103,7 @@ export default function JobStats({ applications }) {
         {/* Status breakdown */}
         <div className="rounded-xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-5">
-            <TrendingUp size={13} className="text-yellow-400" />
+            <TrendingUp size={13} style={{ color: 'var(--accent)' }} />
             <h3 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Application Status</h3>
           </div>
           <div className="space-y-4">
@@ -130,7 +130,7 @@ export default function JobStats({ applications }) {
           </div>
           <div className="flex items-end gap-2">
             {[
-              { label: 'Applied',    value: total,          color: '#EAB308' },
+              { label: 'Applied',    value: total,          color: 'var(--accent)' },
               { label: 'Responded',  value: responded,      color: '#60a5fa' },
               { label: 'Interviews', value: interviews,     color: '#4ade80' },
               { label: 'Referrals',  value: referralCount,  color: '#c084fc' },

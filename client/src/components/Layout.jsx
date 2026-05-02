@@ -27,7 +27,7 @@ function B3Logo({ size = 32 }) {
   return (
     <div
       className="flex items-center justify-center rounded-lg font-black text-black select-none shrink-0"
-      style={{ width: size, height: size, background: '#EAB308', fontSize: size * 0.45, letterSpacing: '-1px' }}
+      style={{ width: size, height: size, background: 'var(--accent)', fontSize: size * 0.45, letterSpacing: '-1px' }}
     >
       B<sup style={{ fontSize: size * 0.28, verticalAlign: 'super' }}>3</sup>
     </div>
@@ -91,7 +91,7 @@ function MiniCalendar({ onClose, upcoming }) {
           return (
             <div key={i} className="flex flex-col items-center gap-0.5 py-0.5">
               <div className="flex items-center justify-center h-7 w-7 rounded-full text-xs cursor-default"
-                style={isToday ? { background: '#EAB308', color: '#000', fontWeight: 700 } : { color: events.length ? '#fff' : '#666' }}>
+                style={isToday ? { background: 'var(--accent)', color: '#000', fontWeight: 700 } : { color: events.length ? '#fff' : '#666' }}>
                 {d}
               </div>
               {events.length > 0 && (
@@ -108,9 +108,9 @@ function MiniCalendar({ onClose, upcoming }) {
 
       {/* Legend */}
       <div className="mt-3 pt-3 space-y-1.5" style={{ borderTop: '1px solid var(--border)' }}>
-        <div className="text-xs text-zinc-500 mb-2">Today: <span className="text-yellow-400 font-medium">{today.format('D MMM YYYY')}</span></div>
+        <div className="text-xs text-zinc-500 mb-2">Today: <span className="font-medium" style={{ color: 'var(--accent)' }}>{today.format('D MMM YYYY')}</span></div>
         <div className="flex items-center gap-4 text-xs text-zinc-500">
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-yellow-400" /> Revision</span>
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} /> Revision</span>
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: '#fb923c' }} /> Follow-up</span>
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: '#60a5fa' }} /> Review</span>
         </div>
@@ -142,7 +142,7 @@ function NotificationsPanel({ alerts, onClose }) {
         {items.map((item, i) => (
           <div key={i} className="px-4 py-3 flex items-start gap-3">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
-              style={{ background: item.type === 'ok' ? '#4ade80' : item.type === 'warn' ? '#EAB308' : '#60a5fa' }} />
+              style={{ background: item.type === 'ok' ? '#4ade80' : item.type === 'warn' ? 'var(--accent)' : '#60a5fa' }} />
             <span className="text-xs text-zinc-300">{item.text}</span>
           </div>
         ))}
@@ -159,7 +159,7 @@ function UserDropdown({ displayName, initials, onLogout, onClose }) {
       {/* Profile header */}
       <div className="px-4 py-3 flex items-center gap-3" style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-black shrink-0"
-          style={{ background: '#EAB308' }}>{initials}</div>
+          style={{ background: 'var(--accent)' }}>{initials}</div>
         <div className="min-w-0">
           <div className="text-xs font-semibold text-white truncate">{displayName}</div>
           <div className="text-xs text-zinc-500">BrickByBrick</div>
@@ -270,9 +270,9 @@ export default function Layout() {
         {/* Daily streak badge */}
         <div className="px-3 py-3" style={{ borderTop: '1px solid var(--border-sub)' }}>
           <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: 'var(--bg-input)' }}>
-            <Flame size={16} className="text-yellow-400 shrink-0" />
+            <Flame size={16} style={{ color: 'var(--accent)' }} className="shrink-0" />
             <div>
-              <div className="text-xs font-bold text-yellow-400">Streak</div>
+              <div className="text-xs font-bold" style={{ color: 'var(--accent)' }}>Streak</div>
               <div className="text-xs text-zinc-500">
                 {streak !== null ? `${streak} Day${streak !== 1 ? 's' : ''}` : '—'}
               </div>
@@ -309,7 +309,7 @@ export default function Layout() {
               <Bell size={16} />
               {notifCount > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-black text-xs font-bold flex items-center justify-center"
-                  style={{ background: '#EAB308', fontSize: '9px' }}>{notifCount}</span>
+                  style={{ background: 'var(--accent)', fontSize: '9px' }}>{notifCount}</span>
               )}
             </button>
             {showNotif && <NotificationsPanel alerts={alerts} onClose={() => setShowNotif(false)} />}
@@ -329,7 +329,7 @@ export default function Layout() {
             <button onClick={() => { setShowUser(v => !v); setShowNotif(false); setShowCal(false); }}
               className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-white/5 transition-colors">
               <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-black shrink-0"
-                style={{ background: '#EAB308' }}>{initials}</div>
+                style={{ background: 'var(--accent)' }}>{initials}</div>
               <span className="text-xs text-white font-medium hidden sm:block">{displayName}</span>
               <ChevronDown size={12} className="text-zinc-500 hidden sm:block" />
             </button>

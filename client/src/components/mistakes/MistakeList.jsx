@@ -54,7 +54,7 @@ export default function MistakeList() {
         <div className="rounded-xl p-4 flex items-center justify-between gap-3 text-sm" style={{ background: '#1a0808', border: '1px solid #3f1515', color: '#f87171' }}>
           <span>{error}</span>
           <button onClick={() => fetchMistakes(filter ? { mistakeType: filter } : {})}
-            className="text-xs px-3 py-1.5 rounded-lg shrink-0 text-black font-medium" style={{ background: '#EAB308' }}>Retry</button>
+            className="text-xs px-3 py-1.5 rounded-lg shrink-0 text-black font-medium" style={{ background: 'var(--accent)' }}>Retry</button>
         </div>
       )}
 

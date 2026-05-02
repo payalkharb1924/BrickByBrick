@@ -31,7 +31,7 @@ export default function Goals() {
     <div className="p-5 space-y-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Target size={18} className="text-yellow-400" />
+          <Target size={18} style={{ color: 'var(--accent)' }} />
           <h1 className="text-xl font-bold text-white">Goals</h1>
         </div>
         <button onClick={() => setShowForm(v => !v)}
@@ -93,7 +93,7 @@ export default function Goals() {
                     <div key={g._id} className="rounded-xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>
                       <div className="flex items-start justify-between gap-3 mb-3">
                         <div className="flex items-start gap-2.5">
-                          <button onClick={() => toggle(g)} className="mt-0.5 text-zinc-500 hover:text-yellow-400 transition-colors">
+                          <button onClick={() => toggle(g)} className="mt-0.5 text-zinc-500 transition-colors" style={{ color: 'var(--accent)' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'} onMouseLeave={e => e.currentTarget.style.color = '#71717a'}>
                             <Circle size={16} />
                           </button>
                           <div>
@@ -115,7 +115,7 @@ export default function Goals() {
                             className="w-12 text-center rounded px-1 py-0.5 text-xs text-white outline-none"
                             style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-input)' }} />
                           <span className="text-xs text-zinc-500">/ {g.target}</span>
-                          <span className="text-xs font-semibold text-yellow-400 ml-1">{pct}%</span>
+                          <span className="text-xs font-semibold ml-1" style={{ color: 'var(--accent)' }}>{pct}%</span>
                         </div>
                       </div>
                     </div>

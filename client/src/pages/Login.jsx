@@ -45,11 +45,11 @@ export default function Login() {
           <div className="flex items-center gap-3 mb-8">
             <B3Logo size={44} />
             <div>
-              <div className="text-lg font-black text-yellow-400 leading-tight">BRICKBYBRICK</div>
+              <div className="text-lg font-black leading-tight" style={{ color: 'var(--accent)' }}>BRICKBYBRICK</div>
               <div className="text-xs text-zinc-500">BUILD YOUR FUTURE</div>
             </div>
           </div>
-          <div className="text-yellow-400 text-sm font-bold leading-relaxed">
+          <div className="text-sm font-bold leading-relaxed" style={{ color: 'var(--accent)' }}>
             ONE BRICK AT A TIME.
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function Login() {
           <div className="flex items-center gap-3 p-4 rounded-xl" style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }}>
             <B3Logo size={52} />
             <div>
-              <div className="text-base font-black text-yellow-400">BrickByBrick</div>
+              <div className="text-base font-black" style={{ color: 'var(--accent)' }}>BrickByBrick</div>
               <div className="text-xs text-zinc-500 mt-0.5">NO SHORTCUTS. JUST SYSTEMS.</div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function Login() {
           <div className="flex flex-col items-center mb-8 gap-3 lg:hidden">
             <B3Logo size={48} />
             <div className="text-center">
-              <div className="text-xl font-black text-yellow-400">BrickByBrick</div>
+              <div className="text-xl font-black" style={{ color: 'var(--accent)' }}>BrickByBrick</div>
               <div className="text-xs text-zinc-500 mt-0.5">NO SHORTCUTS. JUST SYSTEMS.</div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function Login() {
 
             <p className="mt-5 text-center text-sm text-zinc-500">
               Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-yellow-400 hover:text-yellow-300">Register</Link>
+              <Link to="/register" className="font-medium transition-colors" style={{ color: 'var(--accent)' }} onMouseEnter={e => e.target.style.opacity = '0.8'} onMouseLeave={e => e.target.style.opacity = '1'}>Register</Link>
             </p>
           </div>
         </div>
