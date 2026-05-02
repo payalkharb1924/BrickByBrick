@@ -188,7 +188,7 @@ export default function Settings() {
             </div>
             <div>
               <label className="block text-xs text-zinc-500 mb-2">Theme</label>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {[['dark', 'Dark', Moon], ['cool', 'Cool', Sparkles], ['elegant', 'Elegant', Sparkles], ['classic', 'Classic', Sparkles]].map(([val, label, Icon]) => (
                   <button key={val} onClick={() => setTheme(val)}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
