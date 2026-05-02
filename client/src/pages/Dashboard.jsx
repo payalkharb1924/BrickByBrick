@@ -97,7 +97,7 @@ function TodayOverview({ overview }) {
                   <span className="w-2 h-2 rounded-full" style={{ background: c }} />
                   <span className="text-zinc-400">{d}</span>
                 </div>
-                <span className="text-zinc-300">{v}</span>
+                <span className="text-zinc-600">{v}</span>
               </div>
             ))}
           </div>
@@ -116,7 +116,7 @@ function TodayOverview({ overview }) {
                   <span className="w-2 h-2 rounded-full" style={{ background: c }} />
                   <span className="text-zinc-400">{l}</span>
                 </div>
-                <span className="text-zinc-300">{v}</span>
+                <span className="text-zinc-600">{v}</span>
               </div>
             ))}
           </div>
@@ -135,7 +135,7 @@ function TodayOverview({ overview }) {
                   <span className="w-2 h-2 rounded-full" style={{ background: c }} />
                   <span className="text-zinc-400">{l}</span>
                 </div>
-                <span className="text-zinc-300">{v}</span>
+                <span className="text-zinc-600">{v}</span>
               </div>
             ))}
           </div>
@@ -173,7 +173,7 @@ function RecentActivity({ activities }) {
                 <Icon size={13} style={{ color }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-zinc-300 leading-snug">{item.text}</p>
+                <p className="text-xs text-zinc-600 leading-snug">{item.text}</p>
                 <p className="text-xs text-zinc-600 mt-0.5">{dayjs(item.time).fromNow()}</p>
               </div>
             </div>
@@ -209,7 +209,7 @@ function UpcomingPanel({ items }) {
         </Link>
       </div>
       {!items || items.length === 0 ? (
-        <p className="text-zinc-600 text-xs">Nothing upcoming. You're all caught up!</p>
+        <p className="text-zinc-800 text-xs">Nothing upcoming. You're all caught up!</p>
       ) : (
         <div className="space-y-2.5">
           {items.map((item, i) => {
@@ -220,7 +220,7 @@ function UpcomingPanel({ items }) {
                 <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0" style={{ background: 'var(--bg-elevated)' }}>
                   <Icon size={11} style={{ color }} />
                 </div>
-                <span className="flex-1 text-xs text-zinc-300 truncate">{item.text}</span>
+                <span className="flex-1 text-xs text-zinc-600 truncate">{item.text}</span>
                 <span className="text-xs shrink-0" style={{ color: when === 'Today' ? 'var(--accent)' : '#666' }}>{when}</span>
               </div>
             );
@@ -244,7 +244,7 @@ function FocusPanel({ focus }) {
         </div>
         <div>
           <div className="text-xs text-zinc-500 mb-1">Improvement</div>
-          <div className="text-xs text-zinc-300">
+          <div className="text-xs text-zinc-600">
             {focus?.improvement || <span className="text-zinc-600">Complete a weekly review to set your focus</span>}
           </div>
         </div>

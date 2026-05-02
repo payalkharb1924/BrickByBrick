@@ -18,11 +18,25 @@
     color: #f0e6ff;
   }
 
+  /* ── Elegant theme ── */
+  body.theme-elegant {
+    background-color: #0a1410;
+    color: #e8f0ed;
+  }
+
+  /* ── Classic theme ── */
+  body.theme-classic {
+    background-color: #222222;
+    color: #1a1a1a;
+  }
+
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: #111; }
   ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: #EAB308; }
   body.theme-cool ::-webkit-scrollbar-thumb:hover { background: #FB2576; }
+  body.theme-elegant ::-webkit-scrollbar-thumb:hover { background: #408A71; }
+  body.theme-classic ::-webkit-scrollbar-thumb:hover { background: #FA8112; }
 
   input, select, textarea { color-scheme: dark; }
 }
@@ -58,6 +72,74 @@ body.theme-cool {
   --text:         #f0e6ff;
   --text-sub:     #c4a8e8;
   --text-muted:   #8060a8;
+}
+
+body.theme-elegant {
+  --accent:       #408A71;
+  --accent-hover: #2f6b57;
+  --bg:           #0a1410;
+  --bg-sub:       #0f1d18;
+  --bg-card:      #132620;
+  --bg-input:     #162a23;
+  --bg-elevated:  #1a3a2f;
+  --border:       #285A48;
+  --border-sub:   #1f4a3d;
+  --border-input: #2a6b57;
+  --text:         #e8f0ed;
+  --text-sub:     #a8d4c4;
+  --text-muted:   #6b9d8f;
+}
+
+body.theme-classic {
+  --accent:       #FA8112;
+  --accent-hover: #e07010;
+  --bg:           #F5E7C6;
+  --bg-sub:       #F5E7C6;
+  --bg-card:      #FAF3E1;
+  --bg-input:     #FAF3E1;
+  --bg-elevated:  #E8D9B0;
+  --border:       #D4C4A0;
+  --border-sub:   #C4B490;
+  --border-input: #D4C4A0;
+  --text:         #000000;
+  --text-sub:     #202020;
+  --text-muted:   #161616;
+}
+
+/* Classic theme: light backgrounds get dark text, dark backgrounds get accent */
+body.theme-classic h1,
+body.theme-classic h2,
+body.theme-classic h3,
+body.theme-classic h4,
+body.theme-classic h5,
+body.theme-classic h6 {
+  color: #1a1a1a !important;
+}
+
+/* Override for dark backgrounds in classic theme */
+body.theme-classic [style*="background: var(--bg)"] h1,
+body.theme-classic [style*="background: var(--bg)"] h2,
+body.theme-classic [style*="background: var(--bg)"] h3,
+body.theme-classic [style*="background: var(--bg)"] h4,
+body.theme-classic [style*="background: var(--bg)"] h5,
+body.theme-classic [style*="background: var(--bg)"] h6 {
+  color: var(--accent) !important;
+}
+
+body.theme-classic .text-white {
+  color: #1a1a1a !important;
+}
+
+/* Keep white text when element itself has accent background (active nav tabs) */
+body.theme-classic [style*="background: var(--accent)"],
+body.theme-classic [style*="background: var(--accent)"] .text-white {
+  color: #fff !important;
+}
+
+/* Override text-white for dark backgrounds */
+body.theme-classic [style*="background: var(--bg)"] .text-white,
+body.theme-classic [style*="background: var(--bg-sub)"] .text-white {
+  color: var(--accent) !important;
 }
 
 @layer utilities {

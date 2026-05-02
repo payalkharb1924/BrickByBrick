@@ -189,11 +189,11 @@ export default function Settings() {
             <div>
               <label className="block text-xs text-zinc-500 mb-2">Theme</label>
               <div className="flex gap-2">
-                {[['dark', 'Dark', Moon], ['cool', 'Cool', Sparkles]].map(([val, label, Icon]) => (
+                {[['dark', 'Dark', Moon], ['cool', 'Cool', Sparkles], ['elegant', 'Elegant', Sparkles], ['classic', 'Classic', Sparkles]].map(([val, label, Icon]) => (
                   <button key={val} onClick={() => setTheme(val)}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
                     style={theme === val
-                      ? { background: val === 'cool' ? '#FB2576' : 'var(--accent)', color: '#fff' }
+                      ? { background: val === 'cool' ? '#FB2576' : val === 'elegant' ? '#408A71' : val === 'classic' ? '#FA8112' : 'var(--accent)', color: val === 'classic' ? '#1a1a1a' : '#fff' }
                       : { background: 'var(--bg-elevated)', color: 'var(--text-muted)', border: '1px solid var(--border-input)' }}>
                     <Icon size={14} /> {label}
                   </button>

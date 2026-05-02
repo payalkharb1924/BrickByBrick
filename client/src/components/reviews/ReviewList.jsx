@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import dayjs from 'dayjs';
-import { Target, Pencil, Trash2, X, Zap } from 'lucide-react';
+import { Target, Pencil, Trash2, X } from 'lucide-react';
 import useReviewStore from '../../store/reviewStore';
 import Modal from '../Modal';
+import B3Logo from '../B3Logo';
 
 const inputCls = 'w-full rounded-lg px-3 py-2 text-sm text-white outline-none transition-all placeholder-zinc-600';
 const inputStyle = { background: 'var(--bg-input)', border: '1px solid var(--border-input)' };
@@ -100,7 +101,7 @@ function EditModal({ review, onClose }) {
           <button onClick={handleSave} disabled={saving}
             className="flex-1 text-black text-sm font-semibold py-2 rounded-lg disabled:opacity-50 flex items-center justify-center gap-1.5"
             style={{ background: 'var(--accent)' }}>
-            <Zap size={13} /> {saving ? 'Saving...' : 'Save Changes'}
+            <B3Logo size={14} /> {saving ? 'Saving...' : 'Save Changes'}
           </button>
           <button onClick={onClose}
             className="flex-1 text-zinc-300 text-sm py-2 rounded-lg"

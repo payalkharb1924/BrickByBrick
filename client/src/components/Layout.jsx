@@ -3,12 +3,14 @@ import { NavLink, Outlet, useNavigate, Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import {
   LayoutDashboard, Code2, Briefcase, ClipboardList, AlertTriangle,
-  LogOut, Menu, Bell, Calendar, Search, ChevronDown, Zap,
+  LogOut, Menu, Bell, Calendar, Search, ChevronDown,
   BarChart2, Target, BookOpen, Settings, RefreshCw, Flame,
   User, ChevronLeft, ChevronRight as ChevronRightIcon, X
 } from 'lucide-react';
 import useAuthStore from '../store/authStore';
 import api from '../api/client';
+import B3Logo from './B3Logo';
+import useThemeStore from '../store/themeStore';
 
 const navItems = [
   { to: '/',          label: 'Dashboard',        Icon: LayoutDashboard },
@@ -22,17 +24,6 @@ const navItems = [
   { to: '/resources', label: 'Resources',        Icon: BookOpen },
   { to: '/settings',  label: 'Settings',         Icon: Settings },
 ];
-
-function B3Logo({ size = 32 }) {
-  return (
-    <div
-      className="flex items-center justify-center rounded-lg font-black text-black select-none shrink-0"
-      style={{ width: size, height: size, background: 'var(--accent)', fontSize: size * 0.45, letterSpacing: '-1px' }}
-    >
-      B<sup style={{ fontSize: size * 0.28, verticalAlign: 'super' }}>3</sup>
-    </div>
-  );
-}
 
 // ── Mini Calendar ─────────────────────────────────────────────────────────────
 function MiniCalendar({ onClose, upcoming }) {
@@ -200,6 +191,7 @@ export default function Layout() {
 
   const logout = useAuthStore((s) => s.logout);
   const user = useAuthStore((s) => s.user);
+  const { theme } = useThemeStore();
   const navigate = useNavigate();
 
   const handleLogout = () => { logout(); navigate('/login'); };
@@ -245,10 +237,7 @@ export default function Layout() {
       `} style={{ background: 'var(--bg-sub)', borderRight: '1px solid var(--border-sub)' }}>
 
         <div className="px-4 py-4 flex items-center gap-2.5" style={{ borderBottom: '1px solid var(--border-sub)' }}>
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: 'var(--accent)' }}>
-            <Zap size={14} color="#000" strokeWidth={2.5} />
-          </div>
+          <B3Logo size={28} />
           <div className="text-sm font-bold leading-tight" style={{ color: 'var(--accent)' }}>BrickByBrick</div>
         </div>
 
@@ -257,10 +246,12 @@ export default function Layout() {
             <NavLink key={to} to={to} end={to === '/'} onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-150 ${
-                  isActive ? 'text-white' : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  isActive ? '' : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`
               }
-              style={({ isActive }) => isActive ? { background: 'var(--accent)', color: isActive ? '#fff' : undefined } : {}}>
+              style={({ isActive }) => isActive
+                ? { background: 'var(--accent)', color: theme === 'classic' ? '#1a1a1a' : '#fff' }
+                : {}}>
               <Icon size={14} />
               {label}
             </NavLink>

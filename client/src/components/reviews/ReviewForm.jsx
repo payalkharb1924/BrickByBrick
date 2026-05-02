@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { Zap } from 'lucide-react';
 import useReviewStore from '../../store/reviewStore';
+import B3Logo from '../B3Logo';
 
 const getMostRecentSunday = () => {
   const today = dayjs();
@@ -72,7 +72,7 @@ export default function ReviewForm({ onSuccess }) {
         <button type="button" onClick={handleAutofill} disabled={autofilling}
           className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all disabled:opacity-50 text-black"
           style={{ background: 'var(--accent)' }}>
-          <Zap size={12} />
+          <B3Logo size={14} />
           {autofilling ? 'Loading...' : 'Auto-fill Stats'}
         </button>
       </div>
